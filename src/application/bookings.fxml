@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="application.BookingController"
+      spacing="20" alignment="TOP_CENTER" prefWidth="800" prefHeight="600"
+      style="-fx-padding: 20;">
+
+    <Label text="Book Your Rooms" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+    <!-- 上半部分: 选择公司和楼层 -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Company:"/>
+        <ChoiceBox fx:id="companyChoice" prefWidth="150"/>
+        <Label text="Floor:"/>
+        <ChoiceBox fx:id="floorChoice" prefWidth="100"/>
+        <Label text="Quantity:"/>
+        <TextField fx:id="quantityField" prefWidth="80"/>
+        <Label text="Available:"/>
+        <TextField fx:id="availableField" prefWidth="80" editable="false"/>
+        <Button text="Book" onAction="#bookRoom"/>
+    </HBox>
+
+    <!-- 下半部分: 用户自己的预订表格 -->
+    <TableView fx:id="userBookingTable" prefWidth="750">
+        <columns>
+            <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
+            <TableColumn fx:id="colLocation" text="Location" prefWidth="150"/>
+            <TableColumn fx:id="colFloor" text="Floor Number" prefWidth="100"/>
+            <TableColumn fx:id="colType" text="Type" prefWidth="100"/>
+            <TableColumn fx:id="colPrice" text="Price" prefWidth="100"/>
+            <TableColumn fx:id="colQuantity" text="Quantity" prefWidth="100"/>
+        </columns>
+    </TableView>
+</VBox>

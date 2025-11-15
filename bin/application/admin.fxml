@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.AdminController"
+            prefWidth="900" prefHeight="600">
+
+    <!-- 顶部栏 -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-background-color: #e0e0e0; -fx-padding: 10;">
+            <Label fx:id="welcomeLabel" text="Welcome, Admin!" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Button text="Logout" onAction="#handleLogout"/>
+        </HBox>
+    </top>
+
+    <!-- 左侧导航栏 -->
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #3c3f41; -fx-padding: 15;">
+            <Button text="Overview"  onAction="#showOverview"  prefWidth="160"/>
+            <Button text="Users"     onAction="#showUsers"     prefWidth="160"/>
+            <Button text="Spaces"    onAction="#showSpaces"    prefWidth="160"/>
+            <Button text="Bookings"  onAction="#showBookings"  prefWidth="160"/>
+            <Button text="Billing"   onAction="#showBilling"   prefWidth="160"/>
+            <Button text="Analytics" onAction="#showAnalytics" prefWidth="160"/>
+        </VBox>
+    </left>
+
+    <!-- 中间区域 -->
+    <center>
+        <StackPane fx:id="contentArea" style="-fx-background-color: #ffffff; -fx-padding: 20;">
+            <Label text="Select a section from the left panel."/>
+        </StackPane>
+    </center>
+
+</BorderPane>

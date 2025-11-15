@@ -1,0 +1,8 @@
+userId,username,password,email,type,membership
+Hw,123123,1,User,Member,
+HW,Admin123,33,Admin,Non-member,
+Hw1,123,2,User,Non-member,
+wer,123123,sdf@gmail.com,User,Non-member,
+a910be83-2dec-48e5-89f1-ac24b86ea4e5,qwe,234234,rer,User,Non-member
+06d2be36-6089-4c83-9e65-2e88bac678b4,asd,Admin123,admin2@gmail.com,Admin,Member
+b3d82298-6afc-4479-8ef6-0178b0a69905,joy,123123,joy2025@gmail.com,User,Non-member

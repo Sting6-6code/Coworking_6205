@@ -1,0 +1,291 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+/* ===== Base ===== */
+.root {
+    -fx-font-family: "Segoe UI", "Microsoft YaHei", "Roboto", "System";
+    -fx-font-size: 14px;
+    -fx-background-color: linear-gradient(to bottom, #f6f8fc, #eef2f9);
+    -fx-text-fill: #2a2f3a;
+}
+
+/* ===== Typography ===== */
+.title-1 {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b3340;
+}
+.subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #6b7280;
+}
+
+/* ===== Card container (把表单放到这里更好看) ===== */
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 14;
+    -fx-padding: 24 28;
+    -fx-effect: dropshadow(gaussian, rgba(16,24,40,0.12), 18, 0.18, 0, 6);
+}
+
+/* ===== Grid / VBox spacing helper ===== */
+.sp-12 > * { -fx-padding: 6 0; }   /* 放在 VBox 上：class="sp-12" */
+
+/* ===== Inputs ===== */
+.text-field, .password-field, .combo-box-base {
+    -fx-background-radius: 10;
+    -fx-background-insets: 0;
+    -fx-padding: 8 12;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d7dce6;
+    -fx-border-radius: 10;
+}
+.text-field:focused, .password-field:focused, .combo-box-base:focused {
+    -fx-border-color: #4e8cff;
+    -fx-effect: dropshadow(gaussian, rgba(78,140,255,0.25), 8, 0.2, 0, 2);
+}
+.prompt-text { -fx-fill: #9aa3b2; }
+
+/* ===== Buttons ===== */
+.button {
+    -fx-background-radius: 10;
+    -fx-padding: 8 18;
+    -fx-font-weight: 600;
+}
+.button-primary {
+    -fx-background-color: #4e8cff;
+    -fx-text-fill: white;
+}
+.button-primary:hover { -fx-background-color: #3d79ee; }
+.button-primary:pressed { -fx-background-color: #2b66d8; }
+
+.button-ghost {
+    -fx-background-color: transparent;
+    -fx-border-color: #cdd5df;
+    -fx-text-fill: #374151;
+}
+.button-ghost:hover { -fx-background-color: rgba(55,65,81,0.06); }
+
+/* ===== Links / small text ===== */
+.link-like {
+    -fx-background-color: transparent;
+    -fx-text-fill: #3b82f6;
+    -fx-underline: true;
+    -fx-padding: 0;
+}
+
+/* ===== CheckBox / Radio ===== */
+.check-box .box {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #cfd6e3;
+}
+.check-box:selected .box { -fx-background-color: #4e8cff; -fx-border-color: #4e8cff; }
+
+/* ===== Error / Info labels ===== */
+.label-error { -fx-text-fill: #dc2626; }
+.label-success { -fx-text-fill: #16a34a; }
+
+/* ===== Small helper widths ===== */
+.w-260 { -fx-pref-width: 260; }
+.w-200 { -fx-pref-width: 200; }
+
+/* ===== Optional: Dark theme (在根节点加 styleClass="dark" 即可启用) ===== */
+.dark {
+    -fx-background-color: linear-gradient(to bottom, #0f172a, #111827);
+    -fx-text-fill: #e5e7eb;
+}
+.dark .card { -fx-background-color: #1f2937; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 18, 0.2, 0, 6); }
+.dark .text-field, .dark .password-field, .dark .combo-box-base {
+    -fx-background-color: #111827;
+    -fx-border-color: #374151;
+    -fx-text-fill: #e5e7eb;
+}
+.dark .button-primary { -fx-background-color: #3b82f6; }
+.dark .button-ghost { -fx-border-color: #4b5563; -fx-text-fill: #e5e7eb; }
+
+
+
+/* ===== Admin Dashboard – 新增样式 ===== */
+
+/* 顶部栏 */
+.tool-bar {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f6f8fc);
+    -fx-padding: 6 12;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* 侧边导航按钮 */
+.nav-btn {
+    -fx-background-color: #f2f5f9;
+    -fx-text-fill: #1f2937;
+    -fx-background-radius: 10;
+    -fx-padding: 8 14;
+    -fx-alignment: CENTER_LEFT;
+}
+.nav-btn:hover { -fx-background-color: #e5edff; }
+.nav-btn:focused { -fx-background-color: #dce6ff; }
+.nav-btn.selected {
+    -fx-background-color: #cfe0ff;
+    -fx-font-weight: 700;
+}
+
+/* Logout 按钮（红色警示） */
+.logout-btn {
+    -fx-background-color: #ff4d4f;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+}
+.logout-btn:hover  { -fx-background-color: #e04345; }
+.logout-btn:pressed{ -fx-background-color: #c73a3c; }
+
+/* KPI 行与卡片 */
+.kpi-row { -fx-spacing: 20; }
+.kpi-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 12;
+    -fx-padding: 14 18;
+    -fx-effect: dropshadow(gaussian, rgba(16,24,40,0.08), 12, 0.12, 0, 3);
+    -fx-alignment: CENTER;
+    -fx-min-width: 140;
+}
+.kpi-title { 
+    -fx-font-size: 12px; 
+    -fx-text-fill: #6b7280; 
+}
+.kpi-value {
+    -fx-font-size: 22px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #2d89ef;
+}
+
+/* 底部状态栏 */
+.statusbar {
+    -fx-padding: 10 14;
+    -fx-text-fill: #6b7280;
+}
+
+/* 可复用的内容卡片（中间区域） */
+.surface {
+    -fx-background-color: white;
+    -fx-background-radius: 14;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 14;
+    -fx-padding: 18 20;
+}
+
+/* 画布 */
+.space-canvas {
+    -fx-background-color: linear-gradient(to bottom, #f7fafc, #eef2f7);
+}
+
+/* 空间方块基础样式 */
+.space-tile {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: rgba(0,0,0,0.08);
+    -fx-background-color: #ecf2ff;
+    -fx-cursor: hand;
+}
+.space-tile:hover {
+    -fx-effect: dropshadow(gaussian, rgba(60,120,255,0.35), 10, 0.2, 0, 2);
+}
+
+/* 状态 */
+.space-available { -fx-background-color: #e7f0ff; -fx-border-color: #8bb8ff; }
+.space-booked    { -fx-background-color: #e9edf1; -fx-border-color: #9aa4ad; }
+.space-maint     { -fx-background-color: #fff4d6; -fx-border-color: #e9b249; }
+
+/* 图例小点 */
+.dot-available, .dot-booked, .dot-maintenance {
+    -fx-min-width: 14; -fx-min-height: 14;
+    -fx-max-width: 14; -fx-max-height: 14;
+    -fx-background-radius: 7;
+    -fx-border-radius: 7;
+}
+.dot-available { -fx-background-color: #8bb8ff; }
+.dot-booked    { -fx-background-color: #9aa4ad; }
+.dot-maintenance { -fx-background-color: #e9b249; }
+
+.toggle-button {
+    -fx-font-size: 13px;
+    -fx-padding: 5px 10px;
+    -fx-background-color: #e8f0fe;
+    -fx-border-color: #90caf9;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #0d47a1;
+}
+
+.toggle-button:hover {
+    -fx-background-color: #bbdefb;
+    -fx-cursor: hand;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #42a5f5;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.toggle-button:disabled {
+    -fx-opacity: 0.6;
+    -fx-background-color: #eeeeee;
+    -fx-text-fill: #999999;
+}
+
+#timeBar {
+    -fx-spacing: 8px;
+    -fx-padding: 10px;
+    -fx-background-color: #f9f9f9;
+}
+
+#lblSelectedTime, #lblCost, #lblTitle {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.button {
+    -fx-font-size: 13px;
+    -fx-background-color: #64b5f6;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #42a5f5;
+}
+
+/* 移除 DatePicker 外层容器的默认背景和边框 */
+.date-picker {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+/* 移除文本框的边框和背景，让它和背景融为一体 */
+.date-picker > .text-field {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 6px 10px;
+}
+
+/* 移除日历按钮背景，使其不撑开外层 */
+.date-picker > .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 2px 6px;
+}
+
+/* 移除外层 Focus 阴影（蓝色 outline） */
+.date-picker:focused,
+.date-picker:focused > .text-field {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-insets: 0;
+}

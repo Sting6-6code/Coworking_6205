@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="application.AdminBookingsController"
+      spacing="15" alignment="TOP_CENTER" prefWidth="900" prefHeight="600"
+      style="-fx-padding: 20;">
+
+    <Label text="Admin Bookings Management" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="bookingTable" editable="false" prefWidth="850">
+        <columns>
+            <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
+            <TableColumn fx:id="colLocation" text="Location" prefWidth="150"/>
+            <TableColumn fx:id="colFloor" text="Floor Number" prefWidth="100"/>
+            <TableColumn fx:id="colType" text="Type" prefWidth="100"/>
+            <TableColumn fx:id="colPrice" text="Price" prefWidth="100"/>
+            <TableColumn fx:id="colQuantity" text="Quantity" prefWidth="100"/>
+            <TableColumn fx:id="colAvailable" text="Available" prefWidth="100"/>
+            <TableColumn fx:id="colEdit" text="Edit" prefWidth="50"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Create Booking" onAction="#createBooking"/>
+        <Button text="Delete Selected" onAction="#deleteBooking"/>
+        <Button text="Save Changes" onAction="#saveChanges"/>
+    </HBox>
+</VBox>

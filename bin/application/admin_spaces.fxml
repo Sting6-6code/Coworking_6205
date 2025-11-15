@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@application.css"
+            xmlns="http://javafx.com/javafx/21.0.9"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.AdminSpaceController">
+
+    <!-- 顶部过滤栏 -->
+    <top>
+        <ToolBar>
+            <Label text="Admin Panel" />
+            <Separator />
+            <Label text="Building:" />
+            <ComboBox fx:id="cbBuildingFilter" prefWidth="120.0" />
+            <Label text="Floor:" />
+            <ComboBox fx:id="cbFloorFilter" prefWidth="100.0" />
+
+            <!-- Type Filter -->
+            <Label text="Type:" />
+            <ComboBox fx:id="cbTypeFilter" prefWidth="140" />
+
+            <!-- Capacity filter -->
+            <Label text="Cap ≥" />
+            <Spinner fx:id="spCapMin" prefWidth="70" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="Add Space" onAction="#showAddSpaceDialog"/>
+        </ToolBar>
+    </top>
+
+    <!-- 左侧操作栏 -->
+    <left>
+        <VBox spacing="12" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="15" right="10" bottom="10" left="10" />
+            </padding>
+
+            <Button fx:id="btnOverview" text="Overview" onAction="#handleOverview"/>
+            <Button text="Back" onAction="#handleBack"/>
+        </VBox>
+    </left>
+
+    <!-- 右侧图例 -->
+    <right>
+        <VBox spacing="8">
+            <padding>
+                <Insets top="15" right="10" bottom="10" left="10" />
+            </padding>
+
+            <Label text="Legend" />
+            <HBox spacing="8"><Pane styleClass="dot-available"/><Label text="Available" /></HBox>
+            <HBox spacing="8"><Pane styleClass="dot-booked"/><Label text="Booked" /></HBox>
+            <HBox spacing="8"><Pane styleClass="dot-maintenance"/><Label text="Maintenance" /></HBox>
+        </VBox>
+    </right>
+
+    <!-- 中心画布区 -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <content>
+                <AnchorPane fx:id="canvas" prefHeight="800" prefWidth="1200" styleClass="space-canvas"/>
+            </content>
+        </ScrollPane>
+    </center>
+
+    <!-- 底部状态栏 -->
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <Label fx:id="lblStatus" text="Ready" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

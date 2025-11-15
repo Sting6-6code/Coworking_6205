@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.OverviewController"
+            prefWidth="600" prefHeight="400">
+
+    <children>
+        <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100">
+            <Label text="System Overview" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+            <!-- 用户数量卡片 -->
+            <HBox alignment="CENTER" spacing="10">
+                <VBox alignment="CENTER" prefWidth="200" prefHeight="100"
+                      style="-fx-background-color: #f4f4f4; -fx-border-color: #cccccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, #999, 5, 0, 2, 2);">
+                    <Label text="Total Users" style="-fx-font-size: 16px;"/>
+                    <Label fx:id="userCountLabel" text="0" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #0078d7;"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

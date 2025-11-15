@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="application.UsersController"
+      spacing="15" alignment="CENTER">
+    
+    <!-- 正确写法：Padding 必须是 Insets -->
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- 标题 -->
+    <Label text="User Information" style="-fx-font-size: 20px; -fx-text-fill: #333;" />
+
+    <!-- 用户信息卡片 -->
+    <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 15; -fx-border-radius: 10; -fx-background-radius: 10;">
+        <HBox spacing="10">
+            <Label text="Username:" style="-fx-font-weight: bold;" />
+            <Label fx:id="usernameLabel" text="(Loading...)" />
+        </HBox>
+
+        <HBox spacing="10">
+            <Label text="Email:" style="-fx-font-weight: bold;" />
+            <Label fx:id="emailLabel" text="(Loading...)" />
+        </HBox>
+
+        <HBox spacing="10">
+            <Label text="Membership:" style="-fx-font-weight: bold;" />
+            <Label fx:id="membershipLabel" text="(Loading...)" />
+            <Button fx:id="upgradeButton" text="Upgrade" onAction="#handleUpgradeMembership" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        </HBox>
+    </VBox>
+
+    <!-- 编辑资料按钮 -->
+    <Button fx:id="editButton" text="Edit Profile" onAction="#handleEditProfile"
+            style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+
+</VBox>

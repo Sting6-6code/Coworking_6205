@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.viewmodel.SpaceInventoryTableModel;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -16,21 +17,21 @@ public class BookingController {
     @FXML private ChoiceBox<String> companyChoice;
     @FXML private ChoiceBox<String> floorChoice;
     @FXML private TextField quantityField;
-    @FXML private TableView<BookingData> userBookingTable;
+    @FXML private TableView<SpaceInventoryTableModel> userBookingTable;
 
-    @FXML private TableColumn<BookingData, String> colName;
-    @FXML private TableColumn<BookingData, String> colLocation;
-    @FXML private TableColumn<BookingData, String> colFloor;
-    @FXML private TableColumn<BookingData, String> colType;
-    @FXML private TableColumn<BookingData, String> colPrice;
-    @FXML private TableColumn<BookingData, String> colQuantity;
-    @FXML private TableColumn<BookingData, String> colAvailable; // 新增列显示可用数量
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colName;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colLocation;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colFloor;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colType;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colPrice;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colQuantity;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colAvailable; // 新增列显示可用数量
 
     private static final String BOOKING_FILE = "data/booking.csv";
     private static final String USERBOOKING_FILE = "data/userbooking.csv";
 
-    private ObservableList<BookingData> allBookingList = FXCollections.observableArrayList();
-    private ObservableList<BookingData> userBookingList = FXCollections.observableArrayList();
+    private ObservableList<SpaceInventoryTableModel> allBookingList = FXCollections.observableArrayList();
+    private ObservableList<SpaceInventoryTableModel> userBookingList = FXCollections.observableArrayList();
 
     private static String currentUser;
 
@@ -62,7 +63,7 @@ public class BookingController {
 
     private void populateCompanyChoice() {
         List<String> companies = allBookingList.stream()
-                .map(BookingData::getName)
+                .map(SpaceInventoryTableModel::getName)
                 .distinct()
                 .collect(Collectors.toList());
         companyChoice.setItems(FXCollections.observableArrayList(companies));
@@ -71,7 +72,7 @@ public class BookingController {
             // 更新楼层选择
             List<String> floors = allBookingList.stream()
                     .filter(b -> b.getName().equals(newVal))
-                    .map(BookingData::getFloor)
+                    .map(SpaceInventoryTableModel::getFloor)
                     .distinct()
                     .collect(Collectors.toList());
             floorChoice.setItems(FXCollections.observableArrayList(floors));
@@ -83,7 +84,7 @@ public class BookingController {
         floorChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             String selectedCompany = companyChoice.getValue();
             if (selectedCompany != null && newVal != null) {
-                BookingData target = allBookingList.stream()
+                SpaceInventoryTableModel target = allBookingList.stream()
                         .filter(b -> b.getName().equals(selectedCompany) && b.getFloor().equals(newVal))
                         .findFirst().orElse(null);
                 if (target != null) {
@@ -102,7 +103,7 @@ public class BookingController {
                 if (!line.trim().isEmpty()) {
                     String[] data = line.split(",");
                     if (data.length < 7) continue; // 包含 Available
-                    allBookingList.add(new BookingData(
+                    allBookingList.add(new SpaceInventoryTableModel(
                             data[0], data[1], data[2], data[3], data[4], data[5], data[6]
                     ));
                 }
@@ -122,7 +123,7 @@ public class BookingController {
                     if (data.length < 7) continue;
                     String username = data[0];
                     if (username.equals(currentUser)) {
-                        userBookingList.add(new BookingData(
+                        userBookingList.add(new SpaceInventoryTableModel(
                                 data[1], data[2], data[3], data[4], data[5], data[6], "0"
                         ));
                     }
@@ -158,7 +159,7 @@ public class BookingController {
             return;
         }
 
-        BookingData target = allBookingList.stream()
+        SpaceInventoryTableModel target = allBookingList.stream()
                 .filter(b -> b.getName().equals(selectedCompany) && b.getFloor().equals(selectedFloor))
                 .findFirst().orElse(null);
 
@@ -183,7 +184,7 @@ public class BookingController {
         saveAllBookings();
 
         // 更新用户自己的预订记录
-        BookingData existing = userBookingList.stream()
+        SpaceInventoryTableModel existing = userBookingList.stream()
                 .filter(b -> b.getName().equals(selectedCompany) && b.getFloor().equals(selectedFloor))
                 .findFirst().orElse(null);
 
@@ -191,7 +192,7 @@ public class BookingController {
             int newQty = Integer.parseInt(existing.getQuantity()) + bookQty;
             existing.setQuantity(String.valueOf(newQty));
         } else {
-            userBookingList.add(new BookingData(
+            userBookingList.add(new SpaceInventoryTableModel(
                     target.getName(), target.getLocation(), target.getFloor(),
                     target.getType(), target.getPrice(), String.valueOf(bookQty), "0"
             ));
@@ -204,7 +205,7 @@ public class BookingController {
 
     private void saveAllBookings() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(BOOKING_FILE))) {
-            for (BookingData b : allBookingList) {
+            for (SpaceInventoryTableModel b : allBookingList) {
                 bw.write(String.join(",", b.getName(), b.getLocation(), b.getFloor(),
                         b.getType(), b.getPrice(), b.getQuantity(), b.getAvailable()));
                 bw.newLine();
@@ -230,7 +231,7 @@ public class BookingController {
                 }
             }
 
-            for (BookingData b : userBookingList) {
+            for (SpaceInventoryTableModel b : userBookingList) {
                 lines.add(String.join(",", currentUser, b.getName(), b.getLocation(), b.getFloor(),
                         b.getType(), b.getPrice(), b.getQuantity()));
             }
@@ -253,48 +254,5 @@ public class BookingController {
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.showAndWait();
-    }
-
-    // 内部类
-    public static class BookingData {
-        private final SimpleStringProperty name, location, floor, type, price, quantity, available;
-
-        public BookingData(String name, String location, String floor, String type, String price, String quantity, String available) {
-            this.name = new SimpleStringProperty(name);
-            this.location = new SimpleStringProperty(location);
-            this.floor = new SimpleStringProperty(floor);
-            this.type = new SimpleStringProperty(type);
-            this.price = new SimpleStringProperty(price);
-            this.quantity = new SimpleStringProperty(quantity);
-            this.available = new SimpleStringProperty(available);
-        }
-
-        public String getName() { return name.get(); }
-        public void setName(String val) { name.set(val); }
-        public SimpleStringProperty nameProperty() { return name; }
-
-        public String getLocation() { return location.get(); }
-        public void setLocation(String val) { location.set(val); }
-        public SimpleStringProperty locationProperty() { return location; }
-
-        public String getFloor() { return floor.get(); }
-        public void setFloor(String val) { floor.set(val); }
-        public SimpleStringProperty floorProperty() { return floor; }
-
-        public String getType() { return type.get(); }
-        public void setType(String val) { type.set(val); }
-        public SimpleStringProperty typeProperty() { return type; }
-
-        public String getPrice() { return price.get(); }
-        public void setPrice(String val) { price.set(val); }
-        public SimpleStringProperty priceProperty() { return price; }
-
-        public String getQuantity() { return quantity.get(); }
-        public void setQuantity(String val) { quantity.set(val); }
-        public SimpleStringProperty quantityProperty() { return quantity; }
-
-        public String getAvailable() { return available.get(); }
-        public void setAvailable(String val) { available.set(val); }
-        public SimpleStringProperty availableProperty() { return available; }
     }
 }

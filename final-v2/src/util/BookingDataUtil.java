@@ -67,22 +67,28 @@ public class BookingDataUtil {
 
     /** 保存 CSV */
     private static void saveBookings() {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(BOOKING_FILE))) {
-            pw.println("bookingId,userId,spaceId,date,startTime,endTime,status");
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get(BOOKING_FILE);
+            java.nio.file.Files.createDirectories(path.getParent());
+            
+            try (PrintWriter pw = new PrintWriter(new FileWriter(BOOKING_FILE))) {
+                pw.println("bookingId,userId,spaceId,date,startTime,endTime,status");
 
-            for (Booking b : bookings) {
-                pw.println(String.join(",",
-                        b.getBookingId(),
-                        b.getUserId(),
-                        b.getSpaceId(),
-                        b.getDate().toString(),
-                        b.getStartTime().toString(),
-                        b.getEndTime().toString(),
-                        b.getStatus()
-                ));
+                for (Booking b : bookings) {
+                    pw.println(String.join(",",
+                            b.getBookingId(),
+                            b.getUserId(),
+                            b.getSpaceId(),
+                            b.getDate().toString(),
+                            b.getStartTime().toString(),
+                            b.getEndTime().toString(),
+                            b.getStatus()
+                    ));
+                }
             }
-
+            System.out.println("Bookings saved to: " + BOOKING_FILE + " (count: " + bookings.size() + ")");
         } catch (IOException e) {
+            System.err.println("ERROR saving bookings: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -90,8 +96,14 @@ public class BookingDataUtil {
 
     /** 添加 booking */
     public static void addBooking(Booking b) {
+        if (b == null) {
+            System.err.println("ERROR: Cannot add null booking!");
+            return;
+        }
+        System.out.println("Adding booking: " + b.getBookingId() + ", userId: " + b.getUserId() + ", spaceId: " + b.getSpaceId());
         bookings.add(b);
         saveBookings();
+        System.out.println("Booking saved. Total bookings: " + bookings.size());
     }
 
     /** 释放 booking */

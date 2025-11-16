@@ -7,23 +7,24 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
+import model.viewmodel.SpaceInventoryTableModel;
 
 import java.io.*;
 
 public class AdminBookingsController {
 
-    @FXML private TableView<BookingData> bookingTable;
-    @FXML private TableColumn<BookingData, String> colName;
-    @FXML private TableColumn<BookingData, String> colLocation;
-    @FXML private TableColumn<BookingData, String> colFloor;
-    @FXML private TableColumn<BookingData, String> colType;
-    @FXML private TableColumn<BookingData, String> colPrice;
-    @FXML private TableColumn<BookingData, String> colQuantity;
-    @FXML private TableColumn<BookingData, String> colAvailable;
-    @FXML private TableColumn<BookingData, String> colEdit;
+    @FXML private TableView<SpaceInventoryTableModel> bookingTable;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colName;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colLocation;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colFloor;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colType;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colPrice;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colQuantity;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colAvailable;
+    @FXML private TableColumn<SpaceInventoryTableModel, String> colEdit;
 
     private static final String DATA_FILE = "data/booking.csv";
-    private ObservableList<BookingData> bookingList = FXCollections.observableArrayList();
+    private ObservableList<SpaceInventoryTableModel> bookingList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -46,7 +47,7 @@ public class AdminBookingsController {
 
             {
                 editBtn.setOnAction(event -> {
-                    BookingData booking = getTableView().getItems().get(getIndex());
+                    SpaceInventoryTableModel booking = getTableView().getItems().get(getIndex());
                     openEditDialog(booking);
                 });
             }
@@ -61,8 +62,8 @@ public class AdminBookingsController {
         bookingTable.setItems(bookingList);
     }
 
-    private void openEditDialog(BookingData booking) {
-        Dialog<BookingData> dialog = new Dialog<>();
+    private void openEditDialog(SpaceInventoryTableModel booking) {
+        Dialog<SpaceInventoryTableModel> dialog = new Dialog<>();
         dialog.setTitle("Edit Booking");
 
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
@@ -109,7 +110,7 @@ public class AdminBookingsController {
 
     @FXML
     private void createBooking() {
-        Dialog<BookingData> dialog = new Dialog<>();
+        Dialog<SpaceInventoryTableModel> dialog = new Dialog<>();
         dialog.setTitle("Create New Booking");
 
         ButtonType createButtonType = new ButtonType("Create", ButtonBar.ButtonData.OK_DONE);
@@ -137,7 +138,7 @@ public class AdminBookingsController {
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == createButtonType) {
                 String qty = quantityField.getText();
-                return new BookingData(
+                return new SpaceInventoryTableModel(
                         nameField.getText(),
                         locationField.getText(),
                         floorField.getText(),
@@ -158,7 +159,7 @@ public class AdminBookingsController {
 
     @FXML
     private void deleteBooking() {
-        BookingData selected = bookingTable.getSelectionModel().getSelectedItem();
+        SpaceInventoryTableModel selected = bookingTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
             bookingList.remove(selected);
         }
@@ -167,7 +168,7 @@ public class AdminBookingsController {
     @FXML
     private void saveChanges() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(DATA_FILE))) {
-            for (BookingData b : bookingList) {
+            for (SpaceInventoryTableModel b : bookingList) {
                 bw.write(b.getName() + "," + b.getLocation() + "," + b.getFloor() + "," +
                          b.getType() + "," + b.getPrice() + "," + b.getQuantity() + "," + b.getAvailable());
                 bw.newLine();
@@ -181,50 +182,6 @@ public class AdminBookingsController {
         alert.setTitle(title);
         alert.setContentText(msg);
         alert.showAndWait();
-    }
-
-    // 内部类 BookingData
-    public static class BookingData {
-        private final SimpleStringProperty name, location, floor, type, price, quantity, available;
-
-        public BookingData(String name, String location, String floor, String type,
-                           String price, String quantity, String available) {
-            this.name = new SimpleStringProperty(name);
-            this.location = new SimpleStringProperty(location);
-            this.floor = new SimpleStringProperty(floor);
-            this.type = new SimpleStringProperty(type);
-            this.price = new SimpleStringProperty(price);
-            this.quantity = new SimpleStringProperty(quantity);
-            this.available = new SimpleStringProperty(available);
-        }
-
-        public String getName() { return name.get(); }
-        public void setName(String val) { name.set(val); }
-        public SimpleStringProperty nameProperty() { return name; }
-
-        public String getLocation() { return location.get(); }
-        public void setLocation(String val) { location.set(val); }
-        public SimpleStringProperty locationProperty() { return location; }
-
-        public String getFloor() { return floor.get(); }
-        public void setFloor(String val) { floor.set(val); }
-        public SimpleStringProperty floorProperty() { return floor; }
-
-        public String getType() { return type.get(); }
-        public void setType(String val) { type.set(val); }
-        public SimpleStringProperty typeProperty() { return type; }
-
-        public String getPrice() { return price.get(); }
-        public void setPrice(String val) { price.set(val); }
-        public SimpleStringProperty priceProperty() { return price; }
-
-        public String getQuantity() { return quantity.get(); }
-        public void setQuantity(String val) { quantity.set(val); }
-        public SimpleStringProperty quantityProperty() { return quantity; }
-
-        public String getAvailable() { return available.get(); }
-        public void setAvailable(String val) { available.set(val); }
-        public SimpleStringProperty availableProperty() { return available; }
     }
 
     private void loadDataFromCSV() {
@@ -241,7 +198,7 @@ public class AdminBookingsController {
                     String price = data.length > 4 ? data[4] : "";
                     String quantity = data.length > 5 ? data[5] : "";
                     String available = data.length > 6 ? data[6] : quantity; // 如果旧文件没有available
-                    bookingList.add(new BookingData(name, location, floor, type, price, quantity, available));
+                    bookingList.add(new SpaceInventoryTableModel(name, location, floor, type, price, quantity, available));
                 }
             }
         } catch (IOException e) { e.printStackTrace(); }

@@ -8,20 +8,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
+import model.viewmodel.UserTableModel;
 import java.io.*;
 
 public class AdminOverviewController {
 
-    @FXML private TableView<UserData> userTable;
-    @FXML private TableColumn<UserData, String> colUsername;
-    @FXML private TableColumn<UserData, String> colPassword;
-    @FXML private TableColumn<UserData, String> colEmail;
-    @FXML private TableColumn<UserData, String> colType;
-    @FXML private TableColumn<UserData, String> colMembership;
-    @FXML private TableColumn<UserData, String> colEdit;
+    @FXML private TableView<UserTableModel> userTable;
+    @FXML private TableColumn<UserTableModel, String> colUsername;
+    @FXML private TableColumn<UserTableModel, String> colPassword;
+    @FXML private TableColumn<UserTableModel, String> colEmail;
+    @FXML private TableColumn<UserTableModel, String> colType;
+    @FXML private TableColumn<UserTableModel, String> colMembership;
+    @FXML private TableColumn<UserTableModel, String> colEdit;
 
     private static final String DATA_FILE = "data/data.csv";
-    private ObservableList<UserData> userList = FXCollections.observableArrayList();
+    private ObservableList<UserTableModel> userList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -42,7 +43,7 @@ public class AdminOverviewController {
 
             {
                 editBtn.setOnAction((ActionEvent event) -> {
-                    UserData user = getTableView().getItems().get(getIndex());
+                    UserTableModel user = getTableView().getItems().get(getIndex());
                     openEditDialog(user);
                 });
             }
@@ -61,8 +62,8 @@ public class AdminOverviewController {
         userTable.setItems(userList);
     }
 
-    private void openEditDialog(UserData user) {
-        Dialog<UserData> dialog = new Dialog<>();
+    private void openEditDialog(UserTableModel user) {
+        Dialog<UserTableModel> dialog = new Dialog<>();
         dialog.setTitle("Edit User");
 
         // 设置按钮
@@ -125,7 +126,7 @@ public class AdminOverviewController {
                     String email = data.length > 2 ? data[2] : "";
                     String type = data.length > 3 ? data[3] : "User";
                     String membership = data.length > 4 ? data[4] : "Non-member";
-                    userList.add(new UserData(username, password, email, type, membership));
+                    userList.add(new UserTableModel(username, password, email, type, membership));
                 }
             }
         } catch (IOException e) {
@@ -135,13 +136,13 @@ public class AdminOverviewController {
 
     @FXML
     private void addUser() {
-        userList.add(new UserData("new_user", "password", "email@example.com", "User", "Non-member"));
+        userList.add(new UserTableModel("new_user", "password", "email@example.com", "User", "Non-member"));
     }
 
     @FXML
     private void saveChanges() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(DATA_FILE))) {
-            for (UserData u : userList) {
+            for (UserTableModel u : userList) {
                 bw.write(u.getUsername() + "," + u.getPassword() + "," + u.getEmail() + "," + u.getType() + "," + u.getMembership());
                 bw.newLine();
             }
@@ -156,42 +157,5 @@ public class AdminOverviewController {
         alert.setTitle(title);
         alert.setContentText(msg);
         alert.showAndWait();
-    }
-
-    // 内部类：用户模型
-    public static class UserData {
-        private final SimpleStringProperty username;
-        private final SimpleStringProperty password;
-        private final SimpleStringProperty email;
-        private final SimpleStringProperty type;
-        private final SimpleStringProperty membership;
-
-        public UserData(String username, String password, String email, String type, String membership) {
-            this.username = new SimpleStringProperty(username);
-            this.password = new SimpleStringProperty(password);
-            this.email = new SimpleStringProperty(email);
-            this.type = new SimpleStringProperty(type);
-            this.membership = new SimpleStringProperty(membership);
-        }
-
-        public String getUsername() { return username.get(); }
-        public void setUsername(String value) { username.set(value); }
-        public SimpleStringProperty usernameProperty() { return username; }
-
-        public String getPassword() { return password.get(); }
-        public void setPassword(String value) { password.set(value); }
-        public SimpleStringProperty passwordProperty() { return password; }
-
-        public String getEmail() { return email.get(); }
-        public void setEmail(String value) { email.set(value); }
-        public SimpleStringProperty emailProperty() { return email; }
-
-        public String getType() { return type.get(); }
-        public void setType(String value) { type.set(value); }
-        public SimpleStringProperty typeProperty() { return type; }
-
-        public String getMembership() { return membership.get(); }
-        public void setMembership(String value) { membership.set(value); }
-        public SimpleStringProperty membershipProperty() { return membership; }
     }
 }

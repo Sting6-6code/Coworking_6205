@@ -1,0 +1,16 @@
+transactionId,userId,type,amount,date,description,relatedId
+844c0319-7d23-4908-a3dc-ff95c8f23f0f,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,22.5,2025-11-15,Booking: room_051 (room) - 2025-11-15 09:30-11:00,5e85dd48-e582-4045-a280-fd7962b30d32
+ebd6515e-c619-424d-902e-db7c178448b3,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,34.5,2025-11-16,Booking: office_104 (office) - 2025-11-16 16:30-18:00,44db72aa-30a4-4318-b1bf-ab9f942cc3f0
+7944031f-60ca-4343-bc64-6c40757f3b22,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,10.0,2025-11-15,Booking: event_006 (event) - 2025-11-15 17:00-17:30,12ed8a4f-c71a-46a5-b9aa-1115b71ad8d8
+75d85302-1c16-4953-a1ba-70bbd5bb36ab,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,20.0,2025-11-15,Booking: office_027 (office) - 2025-11-15 13:30-14:30,17f8e539-6f5b-4b55-b47c-443ec9da9870
+f77b2c98-0450-4fde-823c-e950c0f64740,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,24.0,2025-11-16,Booking: room_031 (room) - 2025-11-16 17:00-19:00,b65c46c7-9406-441a-b621-fb0cce9d6ab0
+5d5a2122-8ab5-4ce0-a504-4a9ecc84cd07,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,10.0,2025-11-16,Booking: desk_099 (desk) - 2025-11-16 13:00-14:00,d426364d-caee-48bb-bbff-233f25785eb9
+2a806a88-f32c-4a60-97f8-6fe3e3cdc50b,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,12.0,2025-11-16,Booking: lovely_office (office) - 2025-11-16 16:00-17:00,5f291a42-d861-4f19-8ee5-20bb786b0204
+df4f0efe-b731-4e94-94e5-26fca6b9e0fe,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,21.0,2025-11-16,Booking: office_080 (office) - 2025-11-16 13:00-14:30,f9b355e0-3d1c-4a19-b314-03d2ed866ca5
+a87a5250-c84e-4f9a-930a-185ebc782166,4da9e315-da0e-4af7-ae48-70f378c03455,BOOKING,80.0,2025-11-15,Booking: New1 (A) - Quantity: 1,8fb48297-bc7c-4017-ab75-cfd5046e66ec
+d9c7d82e-b956-46d7-9bcf-fb770293b0d2,4da9e315-da0e-4af7-ae48-70f378c03455,BOOKING,5.5,2025-11-15,Booking: event_001 (event) - 2025-11-15 13:00-13:30,210496fd-5054-4b18-90f1-78c713b806fd
+f001c9da-1f29-4202-b180-0f3a9107b85b,4da9e315-da0e-4af7-ae48-70f378c03455,BOOKING,5.5,2025-11-15,Booking: event_001 (event) - 2025-11-15 10:00-10:30,e3c965ee-4beb-4a4b-a89d-cff1ca2696d2
+480e17f0-fa4f-4757-9d4c-74b39c35b3a2,4da9e315-da0e-4af7-ae48-70f378c03455,BOOKING,80.0,2025-11-15,Booking: New1 (A) - Quantity: 1,ca8107bf-7728-40da-9762-5c392184aef2
+458fbfe4-6767-4bcd-bd29-86e24523a0e5,4da9e315-da0e-4af7-ae48-70f378c03455,BOOKING,80.0,2025-11-15,Booking: New1 (A) - Quantity: 1,885cb57a-232b-4ab3-8773-c7e2d781aba4
+c5968711-0049-485a-85b8-d33535ab2e3c,4da9e315-da0e-4af7-ae48-70f378c03455,MEMBERSHIP,9.99,2025-11-15,Membership Upgrade - Monthly Subscription,a4d0b25f-fe24-4784-bd22-ecddaf4c8028
+589ba0cd-aff0-4601-a13e-06f9a171cdde,4da9e315-da0e-4af7-ae48-70f378c03455,BOOKING,160.0,2025-11-15,Booking: New1 (A) - Quantity: 2,21ecbf8b-da50-4a53-96ba-63a55229af02

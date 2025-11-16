@@ -9,8 +9,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Booking;
 import model.Space;
+import model.Transaction;
 import util.BookingDataUtil;
 import util.CurrentUser;
+import util.TransactionDataUtil;
 
 import java.io.IOException;
 import java.time.*;
@@ -204,7 +206,8 @@ public class TimeSlotSelectorController {
         }
 
         Booking booking = new Booking();
-        booking.setBookingId(UUID.randomUUID().toString());
+        String bookingId = UUID.randomUUID().toString();
+        booking.setBookingId(bookingId);
         booking.setUserId(CurrentUser.getUserId());
         booking.setSpaceId(space.getSpaceId());
         booking.setDate(date); // ✅ MODIFIED: 正确写入选择日期
@@ -214,6 +217,35 @@ public class TimeSlotSelectorController {
         booking.setStatus("booked");
 
         BookingDataUtil.addBooking(booking);
+
+        // Create corresponding Transaction record
+        try {
+            String userId = CurrentUser.getUserId();
+            if (userId == null) {
+                System.err.println("ERROR: CurrentUser.getUserId() returned null!");
+                new Alert(Alert.AlertType.WARNING, "Warning: User ID is null. Transaction not created.").showAndWait();
+            } else {
+                double amount = (minutes / 60.0) * space.getCreditsPerHour();
+                String description = String.format("Booking: %s (%s) - %s %s-%s", 
+                        space.getName(), space.getType(), date, start, end);
+                
+                Transaction transaction = new Transaction(
+                        userId,
+                        Transaction.TransactionType.BOOKING,
+                        amount,
+                        date,
+                        description,
+                        bookingId
+                );
+                
+                TransactionDataUtil.addTransaction(transaction);
+                System.out.println("Transaction created successfully: " + transaction.getTransactionId());
+            }
+        } catch (Exception e) {
+            System.err.println("ERROR creating transaction: " + e.getMessage());
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error creating transaction: " + e.getMessage()).showAndWait();
+        }
 
         new Alert(Alert.AlertType.INFORMATION, "Booking completed!").showAndWait();
         stage.close();

@@ -2,16 +2,16 @@ package application;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Transaction;
 import model.viewmodel.TransactionTableModel;
 import util.CurrentUser;
+import util.TransactionDataUtil;
+import datastructure.TransactionBST;
 
-import java.io.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BillingController {
@@ -31,9 +31,11 @@ public class BillingController {
     @FXML
     private Label totalAmountLabel;
 
-    private static final String TRANSACTIONS_FILE = "data/transactions.csv";
     private ObservableList<TransactionTableModel> allTransactions = FXCollections.observableArrayList();
-    private FilteredList<TransactionTableModel> filteredTransactions;
+    
+    // ========== BST优化：使用二叉搜索树维护排序 ==========
+    private TransactionBST transactionBST;
+    // ====================================================
 
     @FXML
     public void initialize() {
@@ -77,53 +79,57 @@ public class BillingController {
         
         String currentUserId = CurrentUser.get() != null ? CurrentUser.get().getUserId() : null;
         if (currentUserId == null) {
+            System.err.println("ERROR: CurrentUser is null in BillingController!");
             showAlert("Error", "User not logged in!");
             return;
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(TRANSACTIONS_FILE))) {
-            String line;
-            boolean isFirstLine = true;
-            
-            while ((line = br.readLine()) != null) {
-                if (isFirstLine) {
-                    isFirstLine = false;
-                    continue; // Skip header
-                }
-                
-                if (line.trim().isEmpty()) continue;
-                
-                try {
-                    Transaction transaction = Transaction.fromCSV(line);
-                    
-                    // Only show transactions for current user
-                    if (transaction.getUserId().equals(currentUserId)) {
-                        String dateStr = transaction.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                        String typeStr = transaction.getType().name();
-                        String description = transaction.getDescription();
-                        double amount = transaction.getAmount();
-                        
-                        allTransactions.add(new TransactionTableModel(dateStr, typeStr, description, amount));
-                    }
-                } catch (Exception e) {
-                    System.err.println("Error parsing transaction: " + line);
-                    e.printStackTrace();
-                }
-            }
-            
-            // Sort by date (newest first)
-            allTransactions.sort((a, b) -> b.getDate().compareTo(a.getDate()));
-            
-            filterTransactions();
-            updateTotal();
-            
-        } catch (FileNotFoundException e) {
-            // File doesn't exist yet, create it
-            createEmptyTransactionsFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to load transactions: " + e.getMessage());
+        System.out.println("Loading transactions for userId: " + currentUserId);
+        
+        // Reload transactions from file
+        TransactionDataUtil.reload();
+        
+        // Get all transactions first to debug
+        List<Transaction> all = TransactionDataUtil.getAllTransactions();
+        System.out.println("Total transactions in system: " + all.size());
+        
+        // Get transactions for current user
+        List<Transaction> userTransactions = TransactionDataUtil.getTransactionsByUserId(currentUserId);
+        System.out.println("Transactions for current user: " + userTransactions.size());
+        
+        // ========== BST优化：使用二叉搜索树维护排序 ==========
+        // 创建BST并插入所有transactions（自动按日期排序）
+        transactionBST = new TransactionBST();
+        for (Transaction transaction : userTransactions) {
+            transactionBST.insert(transaction); // O(log n) 插入，自动维护排序
         }
+        
+        // 中序遍历BST获取有序列表（从早到晚）
+        List<Transaction> sortedTransactions = transactionBST.inOrderTraversal(); // O(n)
+        
+        // 反转列表（从晚到早，newest first）
+        Collections.reverse(sortedTransactions);
+        
+        // 转换为TableModel
+        for (Transaction transaction : sortedTransactions) {
+            String dateStr = transaction.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String typeStr = transaction.getType().name();
+            String description = transaction.getDescription();
+            double amount = transaction.getAmount();
+            
+            System.out.println("Adding transaction to table: " + description + ", amount: " + amount);
+            allTransactions.add(new TransactionTableModel(dateStr, typeStr, description, amount));
+        }
+        
+        // 优化前：使用Collections.sort() - O(n log n)
+        // allTransactions.sort((a, b) -> b.getDate().compareTo(a.getDate()));
+        
+        // 优化后：使用BST - 插入时自动排序 O(n log n)，但支持范围查询等高级操作
+        System.out.println("BST size: " + transactionBST.size() + ", Total transactions in table: " + allTransactions.size());
+        // ====================================================
+        
+        filterTransactions();
+        updateTotal();
     }
 
     private void filterTransactions() {
@@ -157,21 +163,11 @@ public class BillingController {
 
     @FXML
     private void refreshData() {
+        System.out.println("Refreshing billing data...");
         loadTransactions();
+        System.out.println("Billing data refreshed. Total transactions: " + allTransactions.size());
     }
 
-    private void createEmptyTransactionsFile() {
-        try {
-            File file = new File(TRANSACTIONS_FILE);
-            file.getParentFile().mkdirs();
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-                bw.write("transactionId,userId,type,amount,date,description,relatedId");
-                bw.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void showAlert(String title, String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -8,10 +8,12 @@ import model.Transaction;
 import model.User;
 import model.viewmodel.TransactionTableModel;
 import util.CurrentUser;
+import util.TransactionDataUtil;
 
 import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AdminBillingController {
@@ -37,7 +39,6 @@ public class AdminBillingController {
     @FXML
     private Label totalRevenueLabel;
 
-    private static final String TRANSACTIONS_FILE = "data/transactions.csv";
     private static final String USERS_FILE = "data/data.csv";
     private ObservableList<TransactionTableModel> allTransactions = FXCollections.observableArrayList();
     private Map<String, String> userIdToUsernameMap = new HashMap<>();
@@ -118,51 +119,31 @@ public class AdminBillingController {
     private void loadTransactions() {
         allTransactions.clear();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(TRANSACTIONS_FILE))) {
-            String line;
-            boolean isFirstLine = true;
+        // Reload transactions from file
+        TransactionDataUtil.reload();
+        
+        // Get all transactions
+        List<Transaction> transactions = TransactionDataUtil.getAllTransactions();
+        
+        for (Transaction transaction : transactions) {
+            String userId = transaction.getUserId();
+            String username = userIdToUsernameMap.getOrDefault(userId, "Unknown");
+            String dateStr = transaction.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String typeStr = transaction.getType().name();
+            String description = transaction.getDescription();
+            double amount = transaction.getAmount();
+            String transactionId = transaction.getTransactionId();
             
-            while ((line = br.readLine()) != null) {
-                if (isFirstLine) {
-                    isFirstLine = false;
-                    continue; // Skip header
-                }
-                
-                if (line.trim().isEmpty()) continue;
-                
-                try {
-                    Transaction transaction = Transaction.fromCSV(line);
-                    
-                    String userId = transaction.getUserId();
-                    String username = userIdToUsernameMap.getOrDefault(userId, "Unknown");
-                    String dateStr = transaction.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    String typeStr = transaction.getType().name();
-                    String description = transaction.getDescription();
-                    double amount = transaction.getAmount();
-                    String transactionId = transaction.getTransactionId();
-                    
-                    allTransactions.add(new TransactionTableModel(
-                        transactionId, userId, username, dateStr, typeStr, description, amount
-                    ));
-                } catch (Exception e) {
-                    System.err.println("Error parsing transaction: " + line);
-                    e.printStackTrace();
-                }
-            }
-            
-            // Sort by date (newest first)
-            allTransactions.sort((a, b) -> b.getDate().compareTo(a.getDate()));
-            
-            filterTransactions();
-            updateTotal();
-            
-        } catch (FileNotFoundException e) {
-            // File doesn't exist yet, create it
-            createEmptyTransactionsFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to load transactions: " + e.getMessage());
+            allTransactions.add(new TransactionTableModel(
+                transactionId, userId, username, dateStr, typeStr, description, amount
+            ));
         }
+        
+        // Sort by date (newest first)
+        allTransactions.sort((a, b) -> b.getDate().compareTo(a.getDate()));
+        
+        filterTransactions();
+        updateTotal();
     }
 
     private void filterTransactions() {
@@ -206,18 +187,6 @@ public class AdminBillingController {
         loadTransactions();
     }
 
-    private void createEmptyTransactionsFile() {
-        try {
-            File file = new File(TRANSACTIONS_FILE);
-            file.getParentFile().mkdirs();
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-                bw.write("transactionId,userId,type,amount,date,description,relatedId");
-                bw.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void showAlert(String title, String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

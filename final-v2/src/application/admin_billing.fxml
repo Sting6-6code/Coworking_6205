@@ -36,7 +36,7 @@
     <!-- Summary section -->
     <HBox spacing="20" alignment="CENTER_RIGHT" style="-fx-padding: 10;">
         <Label text="Total Revenue:" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
-        <Label fx:id="totalRevenueLabel" text="$0.00" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2e7d32;"/>
+        <Label fx:id="totalRevenueLabel" text="0.00" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2e7d32"/>
     </HBox>
 
 </VBox>

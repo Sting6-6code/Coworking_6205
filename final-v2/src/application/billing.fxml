@@ -32,7 +32,7 @@
     <!-- Summary section -->
     <HBox spacing="20" alignment="CENTER_RIGHT" style="-fx-padding: 10;">
         <Label text="Total Spent:" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
-        <Label fx:id="totalAmountLabel" text="$0.00" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #d32f2f;"/>
+        <Label fx:id="totalAmountLabel" text="0.00" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #d32f2f"/>
     </HBox>
 
 </VBox>

@@ -174,22 +174,18 @@ public class BookingController {
                     }
                     
                     if (matches) {
-                        // 注意：现在保存时quantity都是1，所以不需要拆分
-                        // 但为了兼容历史数据（可能有quantity>1的记录），仍然保留拆分逻辑
-                        int quantity = 1;
-                        try {
-                            quantity = Integer.parseInt(data[6]);
-                        } catch (NumberFormatException e) {
-                            // 如果解析失败，默认为1
-                        }
-                        
-                        // 为每个quantity创建一条记录（兼容历史数据）
-                        for (int i = 0; i < quantity; i++) {
-                            userBookingList.add(new SpaceInventoryTableModel(
-                                    data[1], data[2], data[3], data[4], data[5], "1", "0"
-                            ));
-                            oldSystemCount++;
-                        }
+                    	int quantity = 1;
+                    	try {
+                    	    quantity = Integer.parseInt(data[6]);
+                    	} catch (NumberFormatException e) {
+                    	    quantity = 1;
+                    	}
+
+                    	// 直接添加一条记录，quantity就是 CSV 里的值
+                    	userBookingList.add(new SpaceInventoryTableModel(
+                    	        data[1], data[2], data[3], data[4], data[5], String.valueOf(quantity), "0"
+                    	));
+                    	oldSystemCount++;
                     }
                 }
             }
@@ -323,18 +319,19 @@ public class BookingController {
         if (currentUser == null && CurrentUser.get() != null) {
             currentUser = CurrentUser.get().getUsername();
         }
-        
+
         if (currentUser == null) {
             showAlert("Error", "User not logged in!");
             return;
         }
-        
+
         String selectedCompany = companyChoice.getValue();
         String selectedFloor = floorChoice.getValue();
         int bookQty;
 
         try {
             bookQty = Integer.parseInt(quantityField.getText());
+            if (bookQty <= 0) throw new NumberFormatException();
         } catch (NumberFormatException e) {
             showAlert("Error", "请输入有效数量！");
             return;
@@ -369,83 +366,85 @@ public class BookingController {
         target.setAvailable(String.valueOf(availableQty - bookQty));
         saveAllBookings();
 
-        // 先重新加载用户的所有记录，确保包含历史数据
-        loadUserBookings();
-        
-        // 获取userId和Space信息（在循环外获取，避免重复查找）
+        // 获取 userId
         String userId = null;
         if (CurrentUser.get() != null) {
             userId = CurrentUser.get().getUserId();
         } else if (currentUser != null) {
             userId = getUserIdFromUsername(currentUser);
         }
-        
+
         if (userId == null) {
             System.err.println("ERROR: Cannot get userId in BookingController! currentUser: " + currentUser);
             showAlert("Error", "无法获取用户ID！");
             return;
         }
-        
+
         // 获取Space信息
         Map<String, Space> spacesMap = loadSpaces();
         Space space = spacesMap.values().stream()
                 .filter(s -> s.getName().equals(target.getName()) && s.getType().equals(target.getType()))
                 .findFirst()
                 .orElse(null);
-        
-        double price = Double.parseDouble(target.getPrice());
-        
-        // 如果bookQty > 1，创建多条quantity=1的记录，每条对应一条Transaction
-        // 确保Booking和Transaction一一对应
-        for (int i = 0; i < bookQty; i++) {
-            // 创建Booking记录（quantity=1）
-            userBookingList.add(new SpaceInventoryTableModel(
-                    target.getName(), target.getLocation(), target.getFloor(),
-                    target.getType(), target.getPrice(), "1", "0"
-            ));
-            
-            // 创建对应的Transaction记录
-            try {
-                String description;
-                if (space != null) {
-                    description = String.format("Booking: %s (%s) [Building: %s] - Quantity: 1", 
-                            target.getName(), target.getType(), space.getBuilding());
-                } else {
-                    description = String.format("Booking: %s (%s) - Quantity: 1", 
-                            target.getName(), target.getType());
-                }
-                
-                // 每条Booking记录对应一条Transaction记录
-                String bookingId = UUID.randomUUID().toString();
-                Transaction transaction = new Transaction(
-                        userId,
-                        Transaction.TransactionType.BOOKING,
-                        price, // 每条记录的价格，不是总价
-                        LocalDate.now(),
-                        description,
-                        bookingId
-                );
-                
-                TransactionDataUtil.addTransaction(transaction);
-                System.out.println("Transaction created: " + transaction.getTransactionId() + ", userId: " + userId + ", building: " + (space != null ? space.getBuilding() : "unknown"));
-            } catch (Exception e) {
-                System.err.println("ERROR creating transaction: " + e.getMessage());
-                e.printStackTrace();
+
+        double pricePerUnit = Double.parseDouble(target.getPrice());
+        double totalPrice = pricePerUnit * bookQty;
+
+        // 1️⃣ 添加到用户表格列表（只添加一条，quantity=用户输入）
+        userBookingList.add(new SpaceInventoryTableModel(
+                target.getName(),
+                target.getLocation(),
+                target.getFloor(),
+                target.getType(),
+                target.getPrice(),
+                String.valueOf(bookQty), // 用户输入数量
+                "0"
+        ));
+
+        // 2️⃣ 添加 Transaction（合并数量）
+        try {
+            String description;
+            if (space != null) {
+                description = String.format("Booking: %s (%s) [Building: %s] - Quantity: %d",
+                        target.getName(), target.getType(), space.getBuilding(), bookQty);
+            } else {
+                description = String.format("Booking: %s (%s) - Quantity: %d",
+                        target.getName(), target.getType(), bookQty);
             }
+
+            String bookingId = UUID.randomUUID().toString();
+            Transaction transaction = new Transaction(
+                    userId,
+                    Transaction.TransactionType.BOOKING,
+                    totalPrice, // 总价
+                    LocalDate.now(),
+                    description,
+                    bookingId
+            );
+
+            TransactionDataUtil.addTransaction(transaction);
+            System.out.println("Transaction created: " + transaction.getTransactionId() + ", userId: " + userId);
+        } catch (Exception e) {
+            System.err.println("ERROR creating transaction: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        saveUserBookings();
-        
-        // 重新加载用户记录并刷新表格，确保显示所有记录
-        loadUserBookings();
-        
-        // 强制刷新表格
+        // 3️⃣ 写入 userbooking.csv（只写一条，quantity=用户输入）
+        appendUserBooking(
+                target.getName(),
+                target.getLocation(),
+                target.getFloor(),
+                target.getType(),
+                target.getPrice(),
+                String.valueOf(bookQty)
+        );
+
+        // 刷新表格
         userBookingTable.setItems(null);
         userBookingTable.setItems(userBookingList);
         userBookingTable.refresh();
-        
-        System.out.println("Table refreshed. Total items: " + userBookingList.size() + ", Transactions created: " + bookQty);
-        
+
+        System.out.println("Table refreshed. Total items: " + userBookingList.size());
         showAlert("Success", "预订成功！");
     }
 
@@ -461,61 +460,34 @@ public class BookingController {
         }
     }
 
-    private void saveUserBookings() {
-        try {
-            // 确保currentUser已设置
-            if (currentUser == null && CurrentUser.get() != null) {
-                currentUser = CurrentUser.get().getUsername();
-            }
-            
-            if (currentUser == null) {
-                System.err.println("ERROR: currentUser is null, cannot save user bookings!");
-                return;
-            }
-            
-            List<String> lines = new ArrayList<>();
-            File file = new File(USERBOOKING_FILE);
-            
-            // 先读取所有其他用户的记录
-            if (file.exists()) {
-                try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        if (line.trim().isEmpty()) continue;
-                        String[] data = line.split(",");
-                        if (data.length >= 7) {
-                            String username = data[0];
-                            // 跳过当前用户的记录（会被重新写入）和null记录
-                            if (username != null && !username.equals(currentUser) && !username.equals("null")) {
-                                lines.add(line);
-                            }
-                        }
-                    }
-                }
-            }
+    private void appendUserBooking(
+            String name,
+            String location,
+            String floor,
+            String type,
+            String price,
+            String quantity
+    ) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(USERBOOKING_FILE, true))) {
 
-            // 保存当前用户的所有记录（userBookingList应该已经包含所有记录）
-            for (SpaceInventoryTableModel b : userBookingList) {
-                lines.add(String.join(",", currentUser, b.getName(), b.getLocation(), b.getFloor(),
-                        b.getType(), b.getPrice(), b.getQuantity()));
-            }
+            bw.write(String.join(",",
+                    currentUser,
+                    name,
+                    location,
+                    floor,
+                    type,
+                    price,
+                    quantity        // ★ 保存输入的数量
+            ));
+            bw.newLine();
 
-            // 写入文件
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-                for (String l : lines) {
-                    bw.write(l);
-                    bw.newLine();
-                }
-            }
-            
-            System.out.println("User bookings saved. Current user: " + currentUser + ", Records: " + userBookingList.size());
+            System.out.println("Appended user booking: " + name + " qty=" + quantity);
 
         } catch (IOException e) {
-            System.err.println("ERROR saving user bookings: " + e.getMessage());
+            System.err.println("ERROR appending user booking: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
     /**
      * Get userId from username by looking up in data.csv
      */

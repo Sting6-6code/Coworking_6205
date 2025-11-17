@@ -14,6 +14,7 @@ import java.io.*;
 public class AdminOverviewController {
 
     @FXML private TableView<UserTableModel> userTable;
+    @FXML private TableColumn<UserTableModel, String> colUserId;
     @FXML private TableColumn<UserTableModel, String> colUsername;
     @FXML private TableColumn<UserTableModel, String> colPassword;
     @FXML private TableColumn<UserTableModel, String> colEmail;
@@ -31,6 +32,7 @@ public class AdminOverviewController {
     }
 
     private void setupTable() {
+    	colUserId.setCellValueFactory(data -> data.getValue().userIdProperty());
         colUsername.setCellValueFactory(data -> data.getValue().usernameProperty());
         colPassword.setCellValueFactory(data -> data.getValue().passwordProperty());
         colEmail.setCellValueFactory(data -> data.getValue().emailProperty());
@@ -116,34 +118,55 @@ public class AdminOverviewController {
 
     private void loadDataFromCSV() {
         userList.clear();
+
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_FILE))) {
+
+            br.readLine();  // ⭐⭐ 跳过标题行！！
+
             String line;
             while ((line = br.readLine()) != null) {
                 if (!line.trim().isEmpty()) {
+
                     String[] data = line.split(",");
-                    String username = data.length > 0 ? data[0] : "";
-                    String password = data.length > 1 ? data[1] : "";
-                    String email = data.length > 2 ? data[2] : "";
-                    String type = data.length > 3 ? data[3] : "User";
-                    String membership = data.length > 4 ? data[4] : "Non-member";
-                    userList.add(new UserTableModel(username, password, email, type, membership));
+
+                    String userId = data.length > 0 ? data[0] : "";
+                    String username = data.length > 1 ? data[1] : "";
+                    String password = data.length > 2 ? data[2] : "";
+                    String email = data.length > 3 ? data[3] : "";
+                    String type = data.length > 4 ? data[4] : "User";
+                    String membership = data.length > 5 ? data[5] : "Non-member";
+
+                    userList.add(new UserTableModel(
+                            userId, username, password, email, type, membership
+                    ));
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+
     @FXML
     private void addUser() {
-        userList.add(new UserTableModel("new_user", "password", "email@example.com", "User", "Non-member"));
+        String newId = java.util.UUID.randomUUID().toString(); // 生成唯一 userId
+        userList.add(new UserTableModel(
+                newId,
+                "new_user",
+                "password",
+                "email@example.com",
+                "User",
+                "Non-member"
+        ));
     }
+
 
     @FXML
     private void saveChanges() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(DATA_FILE))) {
             for (UserTableModel u : userList) {
-                bw.write(u.getUsername() + "," + u.getPassword() + "," + u.getEmail() + "," + u.getType() + "," + u.getMembership());
+                bw.write( u.getUserId() + "," + u.getUsername() + "," + u.getPassword() + "," + u.getEmail() + "," + u.getType() + "," + u.getMembership());
                 bw.newLine();
             }
             showAlert("Saved", "Changes saved successfully!");

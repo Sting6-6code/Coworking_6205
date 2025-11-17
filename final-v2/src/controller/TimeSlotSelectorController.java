@@ -169,6 +169,19 @@ public class TimeSlotSelectorController {
             new Alert(Alert.AlertType.WARNING, "Please select at least one time slot.").showAndWait();
             return;
         }
+        
+        if (!CurrentUser.isMember()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Membership Required");
+            alert.setHeaderText("Booking Not Allowed");
+            alert.setContentText(
+                    "You are currently a Non-member.\n\n" +
+                    "Only Members can book spaces.\n" +
+                    "Please upgrade your membership to proceed."
+            );
+            alert.showAndWait();
+            return;
+        }
 
         LocalTime start = buttonTimeMap.get(selected.get(0));
         LocalTime end = buttonTimeMap.get(selected.get(selected.size() - 1)).plusMinutes(30);

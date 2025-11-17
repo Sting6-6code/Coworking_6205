@@ -14,3 +14,19 @@ f001c9da-1f29-4202-b180-0f3a9107b85b,4da9e315-da0e-4af7-ae48-70f378c03455,BOOKIN
 458fbfe4-6767-4bcd-bd29-86e24523a0e5,4da9e315-da0e-4af7-ae48-70f378c03455,BOOKING,80.0,2025-11-15,Booking: New1 (A) - Quantity: 1,885cb57a-232b-4ab3-8773-c7e2d781aba4
 c5968711-0049-485a-85b8-d33535ab2e3c,4da9e315-da0e-4af7-ae48-70f378c03455,MEMBERSHIP,9.99,2025-11-15,Membership Upgrade - Monthly Subscription,a4d0b25f-fe24-4784-bd22-ecddaf4c8028
 589ba0cd-aff0-4601-a13e-06f9a171cdde,4da9e315-da0e-4af7-ae48-70f378c03455,BOOKING,160.0,2025-11-15,Booking: New1 (A) - Quantity: 2,21ecbf8b-da50-4a53-96ba-63a55229af02
+79815cba-4f86-4d4b-8b36-4fc7d753f42d,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,90.0,2025-11-17,Booking: office_027 (office) - 2025-11-17 16:30-21:00,b7e86583-ca8f-4dd2-a66e-3acdd1678c39
+b4fe76be-fac6-483c-b8fa-ceb8c15f9891,a910be83-2dec-48e5-89f1-ac24b86ea4e5,MEMBERSHIP,9.99,2025-11-17,Membership Upgrade - Monthly Subscription,2647177f-ada2-485c-9d78-7dc2df447657
+bebcae27-ad81-4aab-9c04-eee7ad8a997f,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,16.5,2025-11-17,Booking: event_001 (event) - 2025-11-17 16:30-18:00,991f0796-fd80-4606-b278-063a71c5aff4
+e61329a4-ba13-42be-baeb-d923bb2d7e7b,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,8.0,2025-11-17,Booking: conference_026 (conference) - 2025-11-17 17:00-18:00,57c5863b-2485-4d66-8a68-b0173295313f
+e8b461a0-57c2-4c5c-899e-74093f663960,2059d37d-9b3e-4ade-a5de-b1baa0271110,MEMBERSHIP,9.99,2025-11-17,Membership Upgrade - Monthly Subscription,bf03935b-5894-47b2-92cb-65ccb0e94396
+10ea0307-695d-468e-a64e-b94fc3cff258,2059d37d-9b3e-4ade-a5de-b1baa0271110,BOOKING,12.0,2025-11-17,Booking: conference_026 (conference) - 2025-11-17 13:00-14:30,224841fb-a308-4d5f-98d2-3b687086de36
+86be6e2e-4518-4797-8dd9-2fb31f6e6a51,ecf09ce2-a29b-4d2e-a918-dde0768966f2,MEMBERSHIP,9.99,2025-11-17,Membership Upgrade - Monthly Subscription,71b7a589-6c67-467a-832f-0840cb84a8bb
+cf82b7ad-61ae-4b5a-8884-25a9ffa81d47,ecf09ce2-a29b-4d2e-a918-dde0768966f2,BOOKING,8.0,2025-11-17,Booking: conference_026 (conference) - 2025-11-17 10:00-11:00,3fce4b5e-12a8-42d7-8a25-074c09fdec4f
+6d751ffa-ad75-4b02-8905-4e5c25e5cad3,ecf09ce2-a29b-4d2e-a918-dde0768966f2,BOOKING,80.0,2025-11-17,Booking: New1 (A) - Quantity: 1,c88d5e61-1d45-4d1b-ba36-d15cc296eb47
+1ed759cc-41d0-4846-a2c9-dde376f79936,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,80.0,2025-11-17,Booking: New1 (A) - Quantity: 1,157bca5d-2c53-4fe4-b3ea-958c7147d037
+9a37550e-31ad-468f-adf2-1e49c330a716,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,80.0,2025-11-17,Booking: New1 (A) - Quantity: 1,72ca13d3-888d-410e-8ff2-3521320c735a
+2c32ba24-9dc2-4e0d-ac66-c25777e749c7,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,80.0,2025-11-17,Booking: New1 (A) - Quantity: 1,32f1d852-e2f7-497c-8e45-66ce8a6f3e3b
+c43460ce-ccc7-48c8-9431-2e9b122f260b,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,44.0,2025-11-17,Booking: A (B) - Quantity: 2,ecb4f536-01c4-46c3-8694-1bc517923049
+10789fa5-5226-408e-924d-31095eb59df2,1f151124-e5e7-4e56-8429-12584039a2e4,BOOKING,160.0,2025-11-17,Booking: New1 (A) - Quantity: 2,915e17ad-ceb2-419e-a5ec-e2da528ae28d
+e358ae20-82d9-424d-87b6-b754ce40eea3,1f151124-e5e7-4e56-8429-12584039a2e4,MEMBERSHIP,9.99,2025-11-17,Membership Upgrade - Monthly Subscription,61a41cfa-f7fa-4883-9319-986cd9504192
+9fec2d69-a354-407b-b082-49fa1de6b3d0,1f151124-e5e7-4e56-8429-12584039a2e4,BOOKING,20.0,2025-11-17,Booking: office_027 (office) - 2025-11-17 10:30-11:30,518c4e75-04a3-4d14-b357-5d1707355d35

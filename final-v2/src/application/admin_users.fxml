@@ -13,6 +13,7 @@
 
     <TableView fx:id="userTable" editable="true" prefWidth="750">
         <columns>
+            <TableColumn fx:id="colUserId" text="User Id" prefWidth="120"/>
             <TableColumn fx:id="colUsername" text="Username" prefWidth="120"/>
             <TableColumn fx:id="colPassword" text="Password" prefWidth="120"/>
             <TableColumn fx:id="colEmail" text="Email" prefWidth="200"/>

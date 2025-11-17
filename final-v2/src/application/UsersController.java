@@ -123,6 +123,9 @@ public class UsersController {
             updateUserInfo(currentUser, currentEmail, currentPassword);
             membershipLabel.setText("Member");
             
+            if (CurrentUser.get() != null) {
+                CurrentUser.get().setMembership("Member");
+            }
             // Create MEMBERSHIP transaction record
             try {
                 String userId = CurrentUser.get() != null ? CurrentUser.get().getUserId() : null;

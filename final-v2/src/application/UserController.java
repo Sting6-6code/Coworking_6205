@@ -6,6 +6,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+
+import model.User;
+import util.CurrentUser; 
+
 import java.io.IOException;
 
 public class UserController {
@@ -15,35 +19,35 @@ public class UserController {
     @FXML
     private StackPane contentArea;
 
-    private static String currentUsername;
-
-    public static void setCurrentUser(String username) {
-        currentUsername = username;
-    }
-
     @FXML
     public void initialize() {
-        if (currentUsername != null) {
-            welcomeLabel.setText("Welcome, " + currentUsername + "!");
+        User user = CurrentUser.get();
+
+        if (user != null && user.getUsername() != null) {
+            welcomeLabel.setText("Welcome, " + user.getUsername() + "!");
+        } else {
+            welcomeLabel.setText("Welcome, User!");
         }
     }
 
     @FXML
     private void handleLogout() {
         try {
+            CurrentUser.set(null); 
             Main.changeScene("login.fxml");
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Error", "Cannot return to login screen.");
         }
     }
-
     // 点击侧边栏按钮加载不同的 FXML
     @FXML private void showOverview()  { loadContent("overview.fxml"); }
     @FXML private void showUsers()     { loadContent("users.fxml"); }
     @FXML private void showSpaces()    { loadContent("spaces.fxml"); }
     @FXML private void showBookings()  { loadContent("bookings.fxml"); }
     @FXML private void showBilling()   { loadContent("billing.fxml"); }
+    @FXML private void showQuestions() { loadContent("questions.fxml"); }
+    
 
     private void loadContent(String fxmlFile) {
         try {

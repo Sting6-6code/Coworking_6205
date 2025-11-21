@@ -30,3 +30,14 @@ c43460ce-ccc7-48c8-9431-2e9b122f260b,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKIN
 10789fa5-5226-408e-924d-31095eb59df2,1f151124-e5e7-4e56-8429-12584039a2e4,BOOKING,160.0,2025-11-17,Booking: New1 (A) - Quantity: 2,915e17ad-ceb2-419e-a5ec-e2da528ae28d
 e358ae20-82d9-424d-87b6-b754ce40eea3,1f151124-e5e7-4e56-8429-12584039a2e4,MEMBERSHIP,9.99,2025-11-17,Membership Upgrade - Monthly Subscription,61a41cfa-f7fa-4883-9319-986cd9504192
 9fec2d69-a354-407b-b082-49fa1de6b3d0,1f151124-e5e7-4e56-8429-12584039a2e4,BOOKING,20.0,2025-11-17,Booking: office_027 (office) - 2025-11-17 10:30-11:30,518c4e75-04a3-4d14-b357-5d1707355d35
+20189cd0-d3bf-4994-a58f-085801787437,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,60.0,2025-11-19,Booking: room_051 (room) - 2025-11-19 09:30-13:30,2afba56f-316d-4974-bcd1-3c8c7c55f336
+af9c7cc6-00b6-4afe-82a9-f2b5cfceff9b,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,14.0,2025-11-19,Booking: office_080 (office) - 2025-11-19 14:00-15:00,60b103ea-6f1a-49f3-8391-7a616f9cafa0
+4837e826-4f8d-41fc-9dc5-d79f0bf5b101,202bb5f3-37ad-441f-b4f1-5e0d7f5acca6,MEMBERSHIP,9.99,2025-11-19,Membership Upgrade - Monthly Subscription,76e500db-f954-4bbb-b757-30a110bb3df2
+6954e604-fb17-4279-a16d-d48d16772861,202bb5f3-37ad-441f-b4f1-5e0d7f5acca6,BOOKING,15.0,2025-11-19,Booking: room_051 (room) - 2025-11-19 13:30-14:30,eaafd0b0-8f14-4a9c-8c1a-e24961b65f2f
+3944914c-f6f2-4cda-bf6d-15434bf53181,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,20.0,2025-11-20,Booking: office_027 (office) - 2025-11-20 14:00-15:00,3afc587d-66b0-4efc-9a9a-621f54db42e4
+dd1535bf-ed6f-477b-87e7-7d0c82818c10,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,20.0,2025-11-20,Booking: office_027 (office) - 2025-11-20 10:00-11:00,82c1447f-3eee-4b7e-a26f-4c116bfba4ce
+fb31a3e3-d52a-49bd-b425-b3f67ca4ab61,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,12.0,2025-11-20,Booking: fashion_office (office) - 2025-11-20 14:00-15:00,bcea06ce-cc6c-49ab-a727-f4afb80b1433
+15e2346c-60a1-4d48-a64d-581a75c8e83a,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,18.0,2025-11-21,Booking: Italian_office (office) - 2025-11-21 13:30-15:00,db004403-8ab8-4b0d-93d1-b4a0bf245946
+d95766cd-d87c-4dfd-bb58-9f2b6804602b,a910be83-2dec-48e5-89f1-ac24b86ea4e5,BOOKING,9.0,2025-11-21,Booking: event_004 (event) - 2025-11-21 14:00-15:00,c1e207bb-346b-4b9e-892e-590e5336306a
+f7c54f15-8cab-40b1-aba8-a3b75af6fc1f,775ebf72-b837-473f-a149-c69b47bfa05d,MEMBERSHIP,9.99,2025-11-21,Membership Upgrade - Monthly Subscription,dc1e74c7-7345-4a38-beae-941fb3080877
+e8bfb2f5-ba57-4ce9-a1fb-cb75b08453ab,775ebf72-b837-473f-a149-c69b47bfa05d,BOOKING,8.0,2025-11-21,Booking: event_050 (event) - 2025-11-21 17:00-18:00,538229c9-ca86-4b54-8daa-0440040ac0db

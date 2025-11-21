@@ -1,8 +1,4 @@
 userId,username,password,email,type,membership
-Hw,123123,1,User,Member,Non-member
-HW,Admin123,33,Admin,Non-member,Non-member
-Hw1,123,2,User,Non-member,Non-member
-wer,123123,sdf@gmail.com,User,Non-member,Non-member
 a910be83-2dec-48e5-89f1-ac24b86ea4e5,qwe,234234,rer,User,Member
 06d2be36-6089-4c83-9e65-2e88bac678b4,asd,Admin123,admin2@gmail.com,Admin,Member
 b3d82298-6afc-4479-8ef6-0178b0a69905,joy,123123,joy2025@gmail.com,User,Non-member
@@ -12,9 +8,5 @@ a36f4f91-f296-4978-b61d-03116320488e,2,2,2,User,Non-member
 2059d37d-9b3e-4ade-a5de-b1baa0271110,Kathy,123123,k.k@gmail.com,User,Member
 ecf09ce2-a29b-4d2e-a918-dde0768966f2,john,234234,j.j@gmail.com,User,Member
 1f151124-e5e7-4e56-8429-12584039a2e4,andrew,345345,a.a@gmail.com,User,Member
-user_id,new_user,password,email@example.com,User,Non-member
-user_id,new_user,password,email@example.com,User,Non-member
-user_id,new_user,password,email@example.com,User,Non-member
-user_id,new_user,password,email@example.com,User,Non-member
-user_id,new_user,password,email@example.com,User,Non-member
-user_id,new_user,password,email@example.com,User,Non-member
+202bb5f3-37ad-441f-b4f1-5e0d7f5acca6,Julia,456456,ju.li@gmail.com,User,Member
+775ebf72-b837-473f-a149-c69b47bfa05d,Celina,789789,c.c@gmail.com,User,Member

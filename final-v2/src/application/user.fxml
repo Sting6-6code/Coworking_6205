@@ -1,36 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane stylesheets="@application.css"
+            xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="application.UserController"
-            prefWidth="900" prefHeight="600">
+            fx:controller="application.UserController">
 
     <!-- 顶部欢迎栏 -->
     <top>
-        <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Label fx:id="welcomeLabel" text="Welcome, User!" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
-            <Button text="Logout" onAction="#handleLogout"/>
+        <HBox alignment="CENTER_RIGHT" spacing="10"
+              style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e9f0fb);
+                     -fx-padding: 14;">
+            <Label fx:id="welcomeLabel"
+                   text="Welcome, User!"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill:#21456B;"/>
+
+            <Button onAction="#handleLogout"
+                    text="Logout"
+                    style="-fx-font-size: 18px; -fx-font-weight: bold;" />
         </HBox>
     </top>
 
     <!-- 左侧导航栏 -->
     <left>
-        <VBox spacing="10" style="-fx-background-color: #2f4f4f; -fx-padding: 15;">
-            <Button text="Overview"  onAction="#showOverview"  prefWidth="160"/>
-            <Button text="Users"     onAction="#showUsers"     prefWidth="160"/>
-            <Button text="Spaces"    onAction="#showSpaces"    prefWidth="160"/>
-            <Button text="Bookings"  onAction="#showBookings"  prefWidth="160"/>
-            <Button text="Billing"   onAction="#showBilling"   prefWidth="160"/>
+        <VBox spacing="15" alignment="CENTER"
+              style="-fx-background-color: #F0F8FF; -fx-padding: 15;">
+
+            <!-- LOGO -->
+            <ImageView fitWidth="180" fitHeight="180" preserveRatio="true">
+                <image>
+                    <Image url="/icons/logo.png" />
+                </image>
+            </ImageView>
+
+            <!-- Overview -->
+            <Button onAction="#showOverview" prefWidth="160">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                            <image><Image url="/icons/Overview.png"/></image>
+                        </ImageView>
+                        <Label text="Overview" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
+            <!-- Users -->
+            <Button onAction="#showUsers" prefWidth="160">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                            <image><Image url="/icons/user.png"/></image>
+                        </ImageView>
+                        <Label text="Users" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
+            <!-- Spaces -->
+            <Button onAction="#showSpaces" prefWidth="160">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <ImageView fitWidth="30" fitHeight="20" preserveRatio="true">
+                            <image><Image url="/icons/space.png"/></image>
+                        </ImageView>
+                        <Label text="Spaces" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
+            <!-- Bookings -->
+            <Button onAction="#showBookings" prefWidth="160">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                            <image><Image url="/icons/booking.png"/></image>
+                        </ImageView>
+                        <Label text="Bookings" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
+            <!-- Billing -->
+            <Button onAction="#showBilling" prefWidth="160">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                            <image><Image url="/icons/billing.png"/></image>
+                        </ImageView>
+                        <Label text="Billing" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
+            <!-- Questions -->
+            <Button onAction="#showQuestions" prefWidth="160">
+                <graphic>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                            <image><Image url="/icons/question.png"/></image>
+                        </ImageView>
+                        <Label text="Questions" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    </HBox>
+                </graphic>
+            </Button>
+
         </VBox>
     </left>
 
-    <!-- 中间显示内容的区域 -->
+    <!-- 中间内容 -->
     <center>
-        <StackPane fx:id="contentArea" style="-fx-background-color: #ffffff; -fx-padding: 20;">
-            <Label text="Please select an option from the left menu."/>
+        <StackPane fx:id="contentArea"
+                   style="-fx-background-color: #ffffff; -fx-padding: 20;">
+            <Label text="Please select an option from the left menu." />
         </StackPane>
     </center>
 

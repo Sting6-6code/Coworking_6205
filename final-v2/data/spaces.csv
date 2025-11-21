@@ -120,3 +120,6 @@ id,name,floor,spaceId,type,building,seats,status,creditsPerHour
 119,office_119,3,E-03-07,office,E,3,available,17.0
 120,event_120,3,E-03-08,event,E,19,maintenance,14.0
 121,lovely_office,1,8HXDC2,office,A,6,available,12.0
+122,fashion_office,1,JWTSKM,office,B,6,available,12.0
+123,antique_room,2,8RDC8E,room,C,4,available,12.0
+124,Italian_office,2,XRN9OL,office,A,10,available,12.0

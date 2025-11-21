@@ -1,6 +1,132 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 /* ===== Base ===== */
+
+/* 登录页 半透明白底卡片 */
+.login-card {
+    -fx-background-color: rgba(255, 255, 255, 0.78);
+    -fx-background-radius: 12;
+    -fx-padding: 30 40 30 40;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.20), 20, 0, 0, 4);
+}
+
+/* 标题字体 */
+.login-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #21456B;
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+/* 按钮样式 */
+.primary-button {
+    -fx-background-color: #21456B;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+}
+
+.primary-button:hover {
+    -fx-background-color: #1A3656;
+}
+
+.secondary-button {
+    -fx-background-color: white;
+    -fx-text-fill: #21456B;
+    -fx-border-color: #21456B;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.secondary-button:hover {
+    -fx-background-color: rgba(33,69,107,0.1);
+}
+
+
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c5d8ff;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 4px;
+    -fx-font-size: 14px;
+}
+
+.combo-box:hover {
+    -fx-border-color: #6aa9ff;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 6px;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d8e3f8;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+.text-field:hover {
+    -fx-border-color: #6aa9ff;
+}
+
+.button {
+    -fx-background-color: #6aa9ff;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 6px 16px;
+    -fx-font-size: 15px;
+}
+
+.button:hover {
+    -fx-background-color: #5596ff;
+}
+
+.button:pressed {
+    -fx-background-color: #3c7bdb;
+}
+
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d0d7e2;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #f5f7fa, #e9edf3);
+}
+
+.table-view .column-header, 
+.table-view .table-column {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px;
+}
+
+.table-view .table-row-cell {
+    -fx-padding: 6px;
+    -fx-font-size: 14px;
+}
+
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #c9dbff;
+    -fx-text-fill: black;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #edf5ff;
+}
+
+
 .root {
     -fx-font-family: "Segoe UI", "Microsoft YaHei", "Roboto", "System";
     -fx-font-size: 14px;
@@ -102,7 +228,6 @@
 }
 .dark .button-primary { -fx-background-color: #3b82f6; }
 .dark .button-ghost { -fx-border-color: #4b5563; -fx-text-fill: #e5e7eb; }
-
 
 
 /* ===== Admin Dashboard – 新增样式 ===== */
@@ -288,4 +413,61 @@
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
     -fx-background-insets: 0;
+}
+
+/* ===== Dialog Card ===== */
+.dialog-card {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 20, 0.1, 0, 3);
+}
+
+/* Grid Layout */
+.dialog-grid .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-font-weight: 600;
+}
+
+/* Standardized Input */
+.dialog-input {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c8d0dd;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 6 10;
+    -fx-font-size: 14px;
+}
+
+.dialog-input:focused {
+    -fx-border-color: #4e8cff;
+    -fx-effect: dropshadow(gaussian, rgba(78,140,255,0.25), 8, 0.2, 0, 2);
+}
+
+/* Buttons */
+.dialog-pane .button-bar .button {
+    -fx-background-radius: 8;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 20;
+}
+
+.dialog-pane .button-bar .button:default {
+    -fx-background-color: #4e8cff;
+    -fx-text-fill: white;
+}
+
+.dialog-pane .button-bar .button:default:hover {
+    -fx-background-color: #3a78e8;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: #e2e8f0;
+    -fx-text-fill: #333;
+}
+
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #cfd7e0;
 }

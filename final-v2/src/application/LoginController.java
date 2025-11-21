@@ -1,20 +1,18 @@
 package application;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import model.User;
 import util.CurrentUser;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class LoginController {
 
     @FXML private TextField usernameField;
-    @FXML private TextField passwordField;
+    @FXML private PasswordField passwordField;
     @FXML private Button loginButton;
     @FXML private Button registerButton;
 
@@ -31,52 +29,42 @@ public class LoginController {
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_FILE))) {
+
             String line;
-
             while ((line = br.readLine()) != null) {
-                String[] f = line.split(",");
 
-                // CSV 格式：
-                // userId, username, password, email, type, membership
+                String[] f = line.split(",");
                 if (f.length < 6) continue;
 
-                String userId    = f[0];
-                String uname     = f[1];
-                String pwd       = f[2];
-                String email     = f[3];
-                String type      = f[4];
+                String userId     = f[0];
+                String uname      = f[1];
+                String pwd        = f[2];
+                String email      = f[3];
+                String type       = f[4];
                 String membership = f[5];
 
+                // 匹配成功
                 if (uname.equals(username) && pwd.equals(password)) {
 
-                    // === 创建 User 对象 ===
-                    User current = new User(
-                            userId,
-                            uname,
-                            pwd,
-                            email,
-                            type,
-                            membership
-                    );
-
-                    // === 存入 CurrentUser 以便后续 booking 使用 ===
-                    CurrentUser.set(current);
-
-                    // === 跳转界面 ===
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                            type.equalsIgnoreCase("Admin") ? "admin.fxml" : "user.fxml"
+                    // 保存当前用户
+                    CurrentUser.set(new User(
+                            userId, uname, pwd, email, type, membership
                     ));
 
-                    Scene scene = new Scene(loader.load(), 600, 400);
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-                    stage.setScene(scene);
+                    // ⭐ 使用 Main.changeScene() 切换页面（固定窗口大小）
+                    if (type.equalsIgnoreCase("Admin")) {
+                        Main.changeScene("admin.fxml");
+                    } else {
+                        Main.changeScene("user.fxml");
+                    }
+
                     return;
                 }
             }
 
             showAlert("Error", "Invalid username or password!");
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
             showAlert("Error", "Login failed due to a system error.");
         }
@@ -88,6 +76,7 @@ public class LoginController {
             Main.changeScene("register.fxml");
         } catch (Exception e) {
             e.printStackTrace();
+            showAlert("Error", "Cannot open the register page.");
         }
     }
 

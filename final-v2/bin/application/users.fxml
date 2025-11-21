@@ -15,7 +15,7 @@
     </padding>
 
     <!-- 标题 -->
-    <Label text="User Information" style="-fx-font-size: 20px; -fx-text-fill: #333;" />
+    <Label text="User Information" style="-fx-font-size: 40px; -fx-text-fill: #333; -fx-font-weight: bold;" />
 
     <!-- 用户信息卡片 -->
     <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 15; -fx-border-radius: 10; -fx-background-radius: 10;">

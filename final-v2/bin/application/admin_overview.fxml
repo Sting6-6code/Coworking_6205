@@ -1,26 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="application.OverviewController"
-            prefWidth="600" prefHeight="400">
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="576.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OverviewController">
 
     <children>
-        <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="50" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100">
-            <Label text="System Overview" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+        <VBox spacing="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
 
-            <!-- 用户数量卡片 -->
-            <HBox alignment="CENTER" spacing="10">
-                <VBox alignment="CENTER" prefWidth="200" prefHeight="100"
-                      style="-fx-background-color: #f4f4f4; -fx-border-color: #cccccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, #999, 5, 0, 2, 2);">
-                    <Label text="Total Users" style="-fx-font-size: 16px;"/>
-                    <Label fx:id="userCountLabel" text="0" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #0078d7;"/>
+            <!-- 上半部分: 总数卡片 -->
+            <HBox alignment="CENTER" spacing="20">
+
+                <VBox alignment="CENTER" prefHeight="100" prefWidth="200" style="-fx-background-color: #f4f4f4; -fx-border-color: #cccccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, #999, 5, 0, 2, 2);">
+                    <Label style="-fx-font-size: 16px;" text="Total Users" />
+                    <Label fx:id="userCountLabel" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="0" />
                 </VBox>
+
+                <VBox alignment="CENTER" prefHeight="100" prefWidth="200" style="-fx-background-color: #f4f4f4; -fx-border-color: #cccccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, #999, 5, 0, 2, 2);">
+                    <Label style="-fx-font-size: 16px;" text="Total Transactions" />
+                    <Label fx:id="transactionCountLabel" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #28a745;" text="0" />
+                </VBox>
+
+                <VBox alignment="CENTER" prefHeight="100" prefWidth="200" style="-fx-background-color: #f4f4f4; -fx-border-color: #cccccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, #999, 5, 0, 2, 2);">
+                    <Label style="-fx-font-size: 16px;" text="Total Amount ($)" />
+                    <Label fx:id="totalAmountLabel" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #d9534f;" text="0.00" />
+                </VBox>
+
             </HBox>
+
+            <!-- 下半部分: 图表 + 最近交易 -->
+            <HBox alignment="CENTER" spacing="20">
+
+                <!-- 左: 日销售图 -->
+                <VBox alignment="TOP_CENTER" prefWidth="400" spacing="10" style="-fx-background-color: #ffffff; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10;">
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Daily Sales ($)" />
+                    <LineChart fx:id="dailySalesChart" prefHeight="289.0" prefWidth="375.0">
+                        <xAxis>
+                            <CategoryAxis label="Date" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis fx:id="yAxisDaily" autoRanging="false" lowerBound="0" upperBound="1000" tickUnit="100" label="Amount"/>
+                        </yAxis>
+                    </LineChart>
+                </VBox>
+
+                <!-- 右: 最近五笔交易 -->
+                <VBox alignment="TOP_CENTER" prefHeight="422.0" prefWidth="400.0" spacing="10" style="-fx-background-color: #ffffff; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10;">
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Recent Transactions" />
+                    <TableView fx:id="recentTransactionTable" prefHeight="250" prefWidth="240">
+                        <columns>
+                            <TableColumn fx:id="usernameCol" prefWidth="60" text="Username" />
+                            <TableColumn fx:id="dateCol" prefWidth="60" text="Date" />
+                            <TableColumn fx:id="typeCol" prefWidth="60" text="Type" />
+                            <TableColumn fx:id="amountCol" prefWidth="60" text="Amount" />
+                        </columns>
+                    </TableView>
+                </VBox>
+
+            </HBox>
+
         </VBox>
     </children>
 </AnchorPane>

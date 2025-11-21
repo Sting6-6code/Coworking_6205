@@ -1,10 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
 
 <VBox xmlns="http://javafx.com/javafx/23.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      spacing="10" alignment="CENTER">
-    <Label text="Overview Section" style="-fx-font-size: 20px; -fx-text-fill: #333;"/>
-    <Label text="Here is your overview data..." />
+      fx:controller="application.overview"
+      spacing="20" alignment="CENTER"
+      style="-fx-background-color: #f0f2f5; -fx-padding: 20;">
+
+    <!-- 页面标题 -->
+    <Label text="Overview" style="-fx-font-size: 40px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+
+    <!-- 卡片容器 -->
+    <HBox spacing="20" alignment="CENTER">
+
+        <!-- 总账单卡片 -->
+        <VBox alignment="CENTER" spacing="5" prefWidth="200" prefHeight="100"
+              style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 10; 
+                     -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 2, 2);">
+            <Label text="Total Bill:" style="-fx-font-size: 14px;"/>
+            <Label fx:id="totalBillLabel" text="0" style="-fx-font-size: 16px; -fx-text-fill: #0055aa;"/>
+        </VBox>
+
+        <!-- 最近预订卡片 -->
+        <VBox alignment="CENTER" spacing="5" prefWidth="700" prefHeight="100"
+              style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 10; 
+                     -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 2, 2);">
+            <Label text="Recent Booking:" style="-fx-font-size: 14px;"/>
+            <Label fx:id="recentBookingLabel" text="None" style="-fx-font-size: 16px; -fx-text-fill: #009933;"/>
+        </VBox>
+
+    </HBox>
+        <!-- 关于我们卡片 -->
+    <VBox alignment="CENTER_LEFT" spacing="10" prefWidth="940"
+          style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 10;
+                 -fx-background-radius: 10; -fx-padding: 20;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 2, 2);">
+
+        <Label text="About Our System" 
+               style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+
+        <Label text="This Coworking Management System helps users easily book rooms, manage payments, and track their booking history."
+               style="-fx-font-size: 14px; -fx-text-fill: #444;"/>
+
+        <Label text="Location: NEU,Boston, MA, USA" style="-fx-font-size: 14px;"/>
+        <Label text="Contact Number: +1 (999) 999-9999" style="-fx-font-size: 14px;"/>
+        <Label text="Email: NEU@coworking-system.com" style="-fx-font-size: 14px;"/>
+
+    </VBox>
+    
+
 </VBox>

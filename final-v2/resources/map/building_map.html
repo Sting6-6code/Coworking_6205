@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Building Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+			overflow: hidden;
+        }
+		#map {
+		    position: absolute;
+		    top: 0;
+		    bottom: 0;
+		    left: 0;
+		    right: 0;
+		    width: 100%;
+		    height: 100%;
+		}
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+  
+    var map = L.map('map').setView([42.3601, -71.0589], 15);  // Boston coordinates
+
+    // 加载 OpenStreetMap 图层
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxZoom: 19
+    }).addTo(map);
+
+    // 示例建筑坐标：波士顿市政厅附近
+    var buildings = [
+        { name: "Building A", code: "A", lat: 42.361145, lng: -71.057083 },
+        { name: "Building B", code: "B", lat: 42.360275, lng: -71.058258 },
+        { name: "Building C", code: "C", lat: 42.359444, lng: -71.060303 },
+        { name: "Building D", code: "D", lat: 42.362220, lng: -71.059700 },
+        { name: "Building E", code: "E", lat: 42.361500, lng: -71.056500 }
+    ];
+
+    // 添加 Marker 和点击事件
+    buildings.forEach(function (b) {
+        var marker = L.marker([b.lat, b.lng]).addTo(map);
+		marker.bindPopup(`<div class="custom-popup">${b.name}</div>`);
+		  marker.on('mouseover', function () {
+		    marker.openPopup();
+		  });
+		  marker.on('mouseout', function () {
+		    marker.closePopup();
+		  });
+
+        marker.on('click', function () {
+            if (window.app && typeof window.app.selectBuilding === "function") {
+                window.app.selectBuilding(b.code);
+            } else {
+                console.log("app.selectBuilding not available yet");
+            }
+        });
+    });
+	
+	// 等待页面加载完毕后，重新触发地图尺寸计算（防止 WebView 初始渲染不完整）
+	 window.addEventListener('load', function () {
+	     setTimeout(function () {
+	         map.invalidateSize();
+	     }, 500); // 延迟触发让 DOM 完全渲染
+	 });
+</script>
+
+</body>
+</html>

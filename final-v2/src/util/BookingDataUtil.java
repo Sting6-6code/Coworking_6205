@@ -282,5 +282,21 @@ public class BookingDataUtil {
         saveBookings();
     }
 
+    
+    /** 
+     * ✅ 获取某个空间的所有 Booking（不区分日期）
+     * 用于统计预订数量 / 计算总收入等
+     */
+    public static List<Booking> getBookingsBySpaceId(String spaceId) {
+        List<Booking> result = new ArrayList<>();
+        for (Booking b : bookings) {
+            if (b.getSpaceId().equals(spaceId)
+                    && !"released".equalsIgnoreCase(b.getStatus())) {
+                result.add(b);
+            }
+        }
+        return result;
+    }
+
 
 }

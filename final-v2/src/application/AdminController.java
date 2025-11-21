@@ -6,6 +6,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import model.User;
+import util.CurrentUser; 
 
 import java.io.IOException;
 
@@ -16,22 +18,22 @@ public class AdminController {
     @FXML
     private StackPane contentArea;
 
-    private static String currentAdmin;
-
-    public static void setCurrentAdmin(String username) {
-        currentAdmin = username;
-    }
 
     @FXML
     public void initialize() {
-        if (currentAdmin != null) {
-            welcomeLabel.setText("Welcome, Admin " + currentAdmin + "!");
+        User user = CurrentUser.get();
+
+        if (user != null && user.getUsername() != null) {
+            welcomeLabel.setText("Welcome, " + user.getUsername() + "!");
+        } else {
+            welcomeLabel.setText("Welcome, Admin!");
         }
     }
 
     @FXML
     private void handleLogout() {
         try {
+            CurrentUser.set(null); 
             Main.changeScene("login.fxml");
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,13 +41,15 @@ public class AdminController {
         }
     }
 
-    // 点击侧边栏按钮加载不同 FXML 内容
+
     @FXML private void showOverview()  { loadContent("admin_overview.fxml"); }
     @FXML private void showUsers()     { loadContent("admin_users.fxml"); }
     @FXML private void showSpaces()    { loadContent("admin_spaces.fxml"); }
     @FXML private void showBookings()  { loadContent("admin_bookings.fxml"); }
     @FXML private void showBilling()   { loadContent("admin_billing.fxml"); }
     @FXML private void showAnalytics() { loadContent("admin_analytics.fxml"); }
+    @FXML private void showQuestions() { loadContent("adminquestion.fxml"); }
+
 
     private void loadContent(String fxmlFile) {
         try {

@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
 import model.viewmodel.UserTableModel;
+
 import java.io.*;
 
 public class AdminOverviewController {
@@ -39,7 +40,6 @@ public class AdminOverviewController {
         colType.setCellValueFactory(data -> data.getValue().typeProperty());
         colMembership.setCellValueFactory(data -> data.getValue().membershipProperty());
 
-        // 编辑按钮列
         colEdit.setCellFactory(param -> new TableCell<>() {
             private final Button editBtn = new Button("✎");
 
@@ -68,11 +68,9 @@ public class AdminOverviewController {
         Dialog<UserTableModel> dialog = new Dialog<>();
         dialog.setTitle("Edit User");
 
-        // 设置按钮
         ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
 
-        // 布局
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -82,6 +80,7 @@ public class AdminOverviewController {
         TextField passwordField = new TextField(user.getPassword());
         TextField emailField = new TextField(user.getEmail());
         TextField typeField = new TextField(user.getType());
+
         ChoiceBox<String> membershipChoice = new ChoiceBox<>();
         membershipChoice.getItems().addAll("Member", "Non-member");
         membershipChoice.setValue(user.getMembership());
@@ -99,7 +98,6 @@ public class AdminOverviewController {
 
         dialog.getDialogPane().setContent(grid);
 
-        // 点击保存后更新
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
                 user.setUsername(usernameField.getText());
@@ -113,20 +111,16 @@ public class AdminOverviewController {
         });
 
         dialog.showAndWait();
-        userTable.refresh(); // 更新显示
+        userTable.refresh();
     }
 
     private void loadDataFromCSV() {
         userList.clear();
-
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_FILE))) {
-
-            br.readLine();  // ⭐⭐ 跳过标题行！！
-
+        	String header = br.readLine();
             String line;
             while ((line = br.readLine()) != null) {
                 if (!line.trim().isEmpty()) {
-
                     String[] data = line.split(",");
 
                     String userId = data.length > 0 ? data[0] : "";
@@ -136,23 +130,18 @@ public class AdminOverviewController {
                     String type = data.length > 4 ? data[4] : "User";
                     String membership = data.length > 5 ? data[5] : "Non-member";
 
-                    userList.add(new UserTableModel(
-                            userId, username, password, email, type, membership
-                    ));
+                    userList.add(new UserTableModel(userId, username, password, email, type, membership));
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
     @FXML
     private void addUser() {
-        String newId = java.util.UUID.randomUUID().toString(); // 生成唯一 userId
         userList.add(new UserTableModel(
-                newId,
+                java.util.UUID.randomUUID().toString(),
                 "new_user",
                 "password",
                 "email@example.com",
@@ -161,12 +150,18 @@ public class AdminOverviewController {
         ));
     }
 
-
     @FXML
     private void saveChanges() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(DATA_FILE))) {
             for (UserTableModel u : userList) {
-                bw.write( u.getUserId() + "," + u.getUsername() + "," + u.getPassword() + "," + u.getEmail() + "," + u.getType() + "," + u.getMembership());
+                bw.write(
+                        u.getUserId() + "," +
+                        u.getUsername() + "," +
+                        u.getPassword() + "," +
+                        u.getEmail() + "," +
+                        u.getType() + "," +
+                        u.getMembership()
+                );
                 bw.newLine();
             }
             showAlert("Saved", "Changes saved successfully!");

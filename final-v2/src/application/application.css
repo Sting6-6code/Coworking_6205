@@ -1,0 +1,536 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+/* ===== Base ===== */
+
+/* Login Page Translucent White Card */
+.login-card {
+  -fx-background-color: rgba(255, 255, 255, 0.78);
+  -fx-background-radius: 12;
+  -fx-padding: 30 40 30 40;
+
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 20, 0, 0, 4);
+}
+
+/* Title Font */
+.login-title {
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #21456b;
+  -fx-text-alignment: center;
+  -fx-wrap-text: true;
+}
+
+/* Button Style */
+.primary-button {
+  -fx-background-color: #21456b;
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-background-radius: 8;
+}
+
+.primary-button:hover {
+  -fx-background-color: #1a3656;
+}
+
+.secondary-button {
+  -fx-background-color: white;
+  -fx-text-fill: #21456b;
+  -fx-border-color: #21456b;
+  -fx-border-radius: 8;
+  -fx-background-radius: 8;
+}
+
+.secondary-button:hover {
+  -fx-background-color: rgba(33, 69, 107, 0.1);
+}
+
+.combo-box {
+  -fx-background-color: #ffffff;
+  -fx-border-color: #c5d8ff;
+  -fx-border-radius: 6px;
+  -fx-background-radius: 6px;
+  -fx-padding: 4px;
+  -fx-font-size: 14px;
+}
+
+.combo-box:hover {
+  -fx-border-color: #6aa9ff;
+}
+
+.combo-box .arrow-button {
+  -fx-background-color: transparent;
+}
+
+.combo-box .list-cell {
+  -fx-padding: 6px;
+}
+
+.text-field {
+  -fx-background-color: #ffffff;
+  -fx-border-color: #d8e3f8;
+  -fx-border-radius: 6px;
+  -fx-background-radius: 6px;
+  -fx-padding: 5px;
+  -fx-font-size: 14px;
+}
+
+.text-field:hover {
+  -fx-border-color: #6aa9ff;
+}
+
+.button {
+  -fx-background-color: #6aa9ff;
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-background-radius: 6px;
+  -fx-padding: 6px 16px;
+  -fx-font-size: 15px;
+}
+
+.button:hover {
+  -fx-background-color: #5596ff;
+}
+
+.button:pressed {
+  -fx-background-color: #3c7bdb;
+}
+
+.table-view {
+  -fx-background-color: #ffffff;
+  -fx-border-color: #d0d7e2;
+}
+
+.table-view .column-header-background {
+  -fx-background-color: linear-gradient(to bottom, #f5f7fa, #e9edf3);
+}
+
+.table-view .column-header,
+.table-view .table-column {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-padding: 8px;
+}
+
+.table-view .table-row-cell {
+  -fx-padding: 6px;
+  -fx-font-size: 14px;
+}
+
+.table-view .table-row-cell:filled:selected {
+  -fx-background-color: #c9dbff;
+  -fx-text-fill: black;
+}
+
+.table-view .table-row-cell:hover {
+  -fx-background-color: #edf5ff;
+}
+
+.root {
+  -fx-font-family: "Segoe UI", "Microsoft YaHei", "Roboto", "System";
+  -fx-font-size: 14px;
+  -fx-background-color: linear-gradient(to bottom, #f6f8fc, #eef2f9);
+  -fx-text-fill: #2a2f3a;
+}
+
+/* ===== Typography ===== */
+.title-1 {
+  -fx-font-size: 22px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #2b3340;
+}
+.subtitle {
+  -fx-font-size: 13px;
+  -fx-text-fill: #6b7280;
+}
+
+/* ===== Card container (better look for forms) ===== */
+.card {
+  -fx-background-color: white;
+  -fx-background-radius: 14;
+  -fx-padding: 24 28;
+  -fx-effect: dropshadow(gaussian, rgba(16, 24, 40, 0.12), 18, 0.18, 0, 6);
+}
+
+/* ===== Grid / VBox spacing helper ===== */
+.sp-12 > * {
+  -fx-padding: 6 0;
+} /* Place on VBox: class="sp-12" */
+
+/* ===== Inputs ===== */
+.text-field,
+.password-field,
+.combo-box-base {
+  -fx-background-radius: 10;
+  -fx-background-insets: 0;
+  -fx-padding: 8 12;
+  -fx-background-color: #ffffff;
+  -fx-border-color: #d7dce6;
+  -fx-border-radius: 10;
+}
+.text-field:focused,
+.password-field:focused,
+.combo-box-base:focused {
+  -fx-border-color: #4e8cff;
+  -fx-effect: dropshadow(gaussian, rgba(78, 140, 255, 0.25), 8, 0.2, 0, 2);
+}
+.prompt-text {
+  -fx-fill: #9aa3b2;
+}
+
+/* ===== Buttons ===== */
+.button {
+  -fx-background-radius: 10;
+  -fx-padding: 8 18;
+  -fx-font-weight: 600;
+}
+.button-primary {
+  -fx-background-color: #4e8cff;
+  -fx-text-fill: white;
+}
+.button-primary:hover {
+  -fx-background-color: #3d79ee;
+}
+.button-primary:pressed {
+  -fx-background-color: #2b66d8;
+}
+
+.button-ghost {
+  -fx-background-color: transparent;
+  -fx-border-color: #cdd5df;
+  -fx-text-fill: #374151;
+}
+.button-ghost:hover {
+  -fx-background-color: rgba(55, 65, 81, 0.06);
+}
+
+/* ===== Links / small text ===== */
+.link-like {
+  -fx-background-color: transparent;
+  -fx-text-fill: #3b82f6;
+  -fx-underline: true;
+  -fx-padding: 0;
+}
+
+/* ===== CheckBox / Radio ===== */
+.check-box .box {
+  -fx-background-radius: 6;
+  -fx-border-radius: 6;
+  -fx-border-color: #cfd6e3;
+}
+.check-box:selected .box {
+  -fx-background-color: #4e8cff;
+  -fx-border-color: #4e8cff;
+}
+
+/* ===== Error / Info labels ===== */
+.label-error {
+  -fx-text-fill: #dc2626;
+}
+.label-success {
+  -fx-text-fill: #16a34a;
+}
+
+/* ===== Small helper widths ===== */
+.w-260 {
+  -fx-pref-width: 260;
+}
+.w-200 {
+  -fx-pref-width: 200;
+}
+
+/* ===== Optional: Dark theme (add styleClass="dark" to root node to enable) ===== */
+.dark {
+  -fx-background-color: linear-gradient(to bottom, #0f172a, #111827);
+  -fx-text-fill: #e5e7eb;
+}
+.dark .card {
+  -fx-background-color: #1f2937;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 18, 0.2, 0, 6);
+}
+.dark .text-field,
+.dark .password-field,
+.dark .combo-box-base {
+  -fx-background-color: #111827;
+  -fx-border-color: #374151;
+  -fx-text-fill: #e5e7eb;
+}
+.dark .button-primary {
+  -fx-background-color: #3b82f6;
+}
+.dark .button-ghost {
+  -fx-border-color: #4b5563;
+  -fx-text-fill: #e5e7eb;
+}
+
+/* ===== Admin Dashboard – New Styles ===== */
+
+/* Top Bar */
+.tool-bar {
+  -fx-background-color: linear-gradient(to bottom, #ffffff, #f6f8fc);
+  -fx-padding: 6 12;
+  -fx-border-color: #e5e7eb;
+  -fx-border-width: 0 0 1 0;
+}
+
+/* Sidebar Navigation Button */
+.nav-btn {
+  -fx-background-color: #f2f5f9;
+  -fx-text-fill: #1f2937;
+  -fx-background-radius: 10;
+  -fx-padding: 8 14;
+  -fx-alignment: CENTER_LEFT;
+}
+.nav-btn:hover {
+  -fx-background-color: #e5edff;
+}
+.nav-btn:focused {
+  -fx-background-color: #dce6ff;
+}
+.nav-btn.selected {
+  -fx-background-color: #cfe0ff;
+  -fx-font-weight: 700;
+}
+
+/* Logout Button (Red Alert) */
+.logout-btn {
+  -fx-background-color: #ff4d4f;
+  -fx-text-fill: white;
+  -fx-background-radius: 10;
+}
+.logout-btn:hover {
+  -fx-background-color: #e04345;
+}
+.logout-btn:pressed {
+  -fx-background-color: #c73a3c;
+}
+
+/* KPI Row and Card */
+.kpi-row {
+  -fx-spacing: 20;
+}
+.kpi-card {
+  -fx-background-color: white;
+  -fx-background-radius: 12;
+  -fx-border-color: #e5e7eb;
+  -fx-border-radius: 12;
+  -fx-padding: 14 18;
+  -fx-effect: dropshadow(gaussian, rgba(16, 24, 40, 0.08), 12, 0.12, 0, 3);
+  -fx-alignment: CENTER;
+  -fx-min-width: 140;
+}
+.kpi-title {
+  -fx-font-size: 12px;
+  -fx-text-fill: #6b7280;
+}
+.kpi-value {
+  -fx-font-size: 22px;
+  -fx-font-weight: 800;
+  -fx-text-fill: #2d89ef;
+}
+
+/* Bottom Status Bar */
+.statusbar {
+  -fx-padding: 10 14;
+  -fx-text-fill: #6b7280;
+}
+
+/* Reusable Content Card (Middle Area) */
+.surface {
+  -fx-background-color: white;
+  -fx-background-radius: 14;
+  -fx-border-color: #e5e7eb;
+  -fx-border-radius: 14;
+  -fx-padding: 18 20;
+}
+
+/* Canvas */
+.space-canvas {
+  -fx-background-color: linear-gradient(to bottom, #f7fafc, #eef2f7);
+}
+
+/* Space Tile Basic Style */
+.space-tile {
+  -fx-background-radius: 8;
+  -fx-border-radius: 8;
+  -fx-border-color: rgba(0, 0, 0, 0.08);
+  -fx-background-color: #ecf2ff;
+  -fx-cursor: hand;
+}
+.space-tile:hover {
+  -fx-effect: dropshadow(gaussian, rgba(60, 120, 255, 0.35), 10, 0.2, 0, 2);
+}
+
+/* Status */
+.space-available {
+  -fx-background-color: #e7f0ff;
+  -fx-border-color: #8bb8ff;
+}
+.space-booked {
+  -fx-background-color: #e9edf1;
+  -fx-border-color: #9aa4ad;
+}
+.space-maint {
+  -fx-background-color: #fff4d6;
+  -fx-border-color: #e9b249;
+}
+
+/* Legend Dots */
+.dot-available,
+.dot-booked,
+.dot-maintenance {
+  -fx-min-width: 14;
+  -fx-min-height: 14;
+  -fx-max-width: 14;
+  -fx-max-height: 14;
+  -fx-background-radius: 7;
+  -fx-border-radius: 7;
+}
+.dot-available {
+  -fx-background-color: #8bb8ff;
+}
+.dot-booked {
+  -fx-background-color: #9aa4ad;
+}
+.dot-maintenance {
+  -fx-background-color: #e9b249;
+}
+
+.toggle-button {
+  -fx-font-size: 13px;
+  -fx-padding: 5px 10px;
+  -fx-background-color: #e8f0fe;
+  -fx-border-color: #90caf9;
+  -fx-border-width: 1px;
+  -fx-border-radius: 5px;
+  -fx-background-radius: 5px;
+  -fx-text-fill: #0d47a1;
+}
+
+.toggle-button:hover {
+  -fx-background-color: #bbdefb;
+  -fx-cursor: hand;
+}
+
+.toggle-button:selected {
+  -fx-background-color: #42a5f5;
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+}
+
+.toggle-button:disabled {
+  -fx-opacity: 0.6;
+  -fx-background-color: #eeeeee;
+  -fx-text-fill: #999999;
+}
+
+#timeBar {
+  -fx-spacing: 8px;
+  -fx-padding: 10px;
+  -fx-background-color: #f9f9f9;
+}
+
+#lblSelectedTime,
+#lblCost,
+#lblTitle {
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #333333;
+}
+
+.button {
+  -fx-font-size: 13px;
+  -fx-background-color: #64b5f6;
+  -fx-text-fill: white;
+  -fx-background-radius: 5px;
+}
+
+.button:hover {
+  -fx-background-color: #42a5f5;
+}
+
+/* Remove default background and border of DatePicker outer container */
+.date-picker {
+  -fx-background-insets: 0;
+  -fx-padding: 0;
+  -fx-background-color: transparent;
+}
+
+/* Remove border and background of text field to blend with background */
+.date-picker > .text-field {
+  -fx-background-color: white;
+  -fx-border-color: #ccc;
+  -fx-border-radius: 5px;
+  -fx-background-radius: 5px;
+  -fx-padding: 6px 10px;
+}
+
+/* Remove calendar button background so it doesn't expand the outer layer */
+.date-picker > .arrow-button {
+  -fx-background-color: transparent;
+  -fx-padding: 2px 6px;
+}
+
+/* Remove outer Focus shadow (blue outline) */
+.date-picker:focused,
+.date-picker:focused > .text-field {
+  -fx-focus-color: transparent;
+  -fx-faint-focus-color: transparent;
+  -fx-background-insets: 0;
+}
+
+/* ===== Dialog Card ===== */
+.dialog-card {
+  -fx-background-color: #ffffff;
+  -fx-padding: 20;
+  -fx-background-radius: 12;
+  -fx-border-radius: 12;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 20, 0.1, 0, 3);
+}
+
+/* Grid Layout */
+.dialog-grid .label {
+  -fx-font-size: 14px;
+  -fx-text-fill: #333333;
+  -fx-font-weight: 600;
+}
+
+/* Standardized Input */
+.dialog-input {
+  -fx-background-color: #ffffff;
+  -fx-border-color: #c8d0dd;
+  -fx-background-radius: 8;
+  -fx-border-radius: 8;
+  -fx-padding: 6 10;
+  -fx-font-size: 14px;
+}
+
+.dialog-input:focused {
+  -fx-border-color: #4e8cff;
+  -fx-effect: dropshadow(gaussian, rgba(78, 140, 255, 0.25), 8, 0.2, 0, 2);
+}
+
+/* Buttons */
+.dialog-pane .button-bar .button {
+  -fx-background-radius: 8;
+  -fx-font-size: 14px;
+  -fx-font-weight: bold;
+  -fx-padding: 6 20;
+}
+
+.dialog-pane .button-bar .button:default {
+  -fx-background-color: #4e8cff;
+  -fx-text-fill: white;
+}
+
+.dialog-pane .button-bar .button:default:hover {
+  -fx-background-color: #3a78e8;
+}
+
+.dialog-pane .button-bar .button {
+  -fx-background-color: #e2e8f0;
+  -fx-text-fill: #333;
+}
+
+.dialog-pane .button-bar .button:hover {
+  -fx-background-color: #cfd7e0;
+}

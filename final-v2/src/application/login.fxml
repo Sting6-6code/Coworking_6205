@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.LoginController"
+            prefWidth="900" prefHeight="600"
+            stylesheets="@application.css"
+            style="-fx-background-image: url('/icons/bg-1.png');
+                   -fx-background-size: cover;
+                   -fx-background-position: center center;">
+
+    <children>
+
+        <!-- Semi-transparent white card -->
+        <VBox alignment="CENTER" spacing="20"
+              prefWidth="350"
+              styleClass="login-card"
+              AnchorPane.rightAnchor="60"
+              AnchorPane.topAnchor="80"
+              AnchorPane.bottomAnchor="80">
+
+            <Label text="WELCOME TO OUR COWORKING PLATFORM" 
+                   styleClass="login-title"/>
+
+            <VBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Username:"/>
+                <TextField fx:id="usernameField" prefWidth="250"/>
+            </VBox>
+
+            <VBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Password:"/>
+                <PasswordField fx:id="passwordField" prefWidth="250"/>
+            </VBox>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button fx:id="loginButton" 
+                        text="Login" 
+                        onAction="#login"
+                        styleClass="primary-button"
+                        prefWidth="110"/>
+
+                <Button fx:id="registerButton" 
+                        text="Register" 
+                        onAction="#goToRegister" 
+                        styleClass="secondary-button"
+                        prefWidth="110"/>
+            </HBox>
+
+        </VBox>
+
+    </children>
+</AnchorPane>

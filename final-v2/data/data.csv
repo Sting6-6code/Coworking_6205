@@ -1,0 +1,17 @@
+userId,username,password,email,type,membership
+a910be83-2dec-48e5-89f1-ac24b86ea4e5,qwe,234234,rer,User,Member
+06d2be36-6089-4c83-9e65-2e88bac678b4,asd,Admin123,admin2@gmail.com,Admin,Member
+b3d82298-6afc-4479-8ef6-0178b0a69905,joy,123123,joy2025@gmail.com,User,Non-member
+4da9e315-da0e-4af7-ae48-70f378c03455,1,1,1,User,Member
+ae774bc8-b81f-4479-812b-09a0e775e14b,Admin,Admin,1,Admin,Member
+a36f4f91-f296-4978-b61d-03116320488e,2,2,2,User,Non-member
+2059d37d-9b3e-4ade-a5de-b1baa0271110,Kathy,123123,k.k@gmail.com,User,Member
+ecf09ce2-a29b-4d2e-a918-dde0768966f2,john,234234,j.j@gmail.com,User,Member
+1f151124-e5e7-4e56-8429-12584039a2e4,andrew,345345,a.a@gmail.com,User,Member
+202bb5f3-37ad-441f-b4f1-5e0d7f5acca6,Julia,456456,ju.li@gmail.com,User,Member
+775ebf72-b837-473f-a149-c69b47bfa05d,Celina,789789,c.c@gmail.com,User,Member
+b62ffb04-b11c-4157-961c-5d79e91c8164,HW1,123,1,User,Non-member
+c3b59e6f-e832-4088-9e26-c7f26ec6cd51,Y,123,1,User,Member
+6996cb31-1423-40c2-8675-f3abd34b0df5,A,Admin123,1,Admin,Member
+c6834e92-5f99-4ffc-8b96-238f3e49f95d,12,12345678,1,User,Non-member
+67d4d287-0c18-430f-bf68-d1c6437d4690,222,Admin123,1,Admin,Member

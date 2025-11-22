@@ -1,0 +1,18 @@
+# Personal script files (contains personal paths, not suitable for commit)
+run.sh
+compile.sh
+README_RUN.md
+SCENE_BUILDER_GUIDE.md
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+bin/
+
+# macOS system files
+.DS_Store
+
+# Compiled output
+*.class
+

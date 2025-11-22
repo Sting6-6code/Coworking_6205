@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Outer VBox automatically centers and controls width -->
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.QuestionController"
+      alignment="TOP_CENTER"
+      spacing="25"
+      style="-fx-padding: 120 20 20 20;">
+
+    <!-- Title -->
+    <Label text="Submit Your Question"
+           style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <!-- Text area outer container to limit max width and center -->
+    <HBox alignment="CENTER">
+        <TextArea fx:id="inputField"
+                  promptText="Enter your question here..."
+                  wrapText="true"
+                  prefRowCount="6"
+                  maxWidth="800"
+                  style="-fx-font-size: 16px;" />
+    </HBox>
+
+    <!-- Submit button -->
+    <Button text="Submit"
+            onAction="#onSubmit"
+            prefWidth="150"
+            style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+    <!-- Status message -->
+    <Label fx:id="statusLabel" text=""
+           style="-fx-text-fill: green; -fx-font-size: 14px;"/>
+
+</VBox>

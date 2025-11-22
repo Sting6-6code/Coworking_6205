@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="application.AdminAnalyticsController"
+      spacing="20" alignment="TOP_CENTER" prefWidth="1000" prefHeight="700"
+      style="-fx-padding: 20;">
+
+    <Label text="Platform Analytics" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+    <!-- Statistics Cards -->
+    <GridPane hgap="15" vgap="15" alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints prefWidth="300"/>
+            <ColumnConstraints prefWidth="300"/>
+            <ColumnConstraints prefWidth="300"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints prefHeight="100"/>
+            <RowConstraints prefHeight="100"/>
+        </rowConstraints>
+
+        <!-- Total Revenue Card -->
+        <VBox style="-fx-background-color: #e3f2fd; -fx-padding: 15; -fx-background-radius: 5;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label text="Total Revenue" style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+            <Label fx:id="totalRevenueLabel" text="0.00" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1976d2"/>
+        </VBox>
+
+        <!-- Total Bookings Card -->
+        <VBox style="-fx-background-color: #f3e5f5; -fx-padding: 15; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Label text="Total Bookings" style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+            <Label fx:id="totalBookingsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #7b1fa2"/>
+        </VBox>
+
+        <!-- Active Users Card -->
+        <VBox style="-fx-background-color: #e8f5e9; -fx-padding: 15; -fx-background-radius: 5;" GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <Label text="Active Users" style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+            <Label fx:id="activeUsersLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #388e3c"/>
+        </VBox>
+
+        <!-- Most Popular Space Type Card -->
+        <VBox style="-fx-background-color: #fff3e0; -fx-padding: 15; -fx-background-radius: 5;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <Label text="Most Popular Type" style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+            <Label fx:id="popularTypeLabel" text="N/A" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #f57c00"/>
+        </VBox>
+
+        <!-- Member vs Non-Member Card -->
+        <VBox style="-fx-background-color: #fce4ec; -fx-padding: 15; -fx-background-radius: 5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label text="Member / Non-Member" style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+            <Label fx:id="memberRatioLabel" text="0 / 0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #c2185b"/>
+        </VBox>
+
+        <!-- Average Spending Card -->
+        <VBox style="-fx-background-color: #e0f2f1; -fx-padding: 15; -fx-background-radius: 5;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label text="Avg. Spending" style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+            <Label fx:id="avgSpendingLabel" text="0.00" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #00796b"/>
+        </VBox>
+    </GridPane>
+
+    <!-- Revenue by Building Table -->
+    <Label text="Revenue by Building" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 10 0 5 0;"/>
+    <TableView fx:id="buildingRevenueTable" prefWidth="950" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="colBuilding" text="Building" prefWidth="150"/>
+            <TableColumn fx:id="colRevenue" text="Revenue" prefWidth="150"/>
+            <TableColumn fx:id="colBookings" text="Bookings" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <!-- Refresh button -->
+    <HBox alignment="CENTER" spacing="10">
+        <Button text="Refresh Analytics" onAction="#refreshAnalytics" style="-fx-font-size: 14px; -fx-padding: 8 20;"/>
+    </HBox>
+
+</VBox>

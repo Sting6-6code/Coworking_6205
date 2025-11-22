@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@application.css"
+            xmlns="http://javafx.com/javafx/21.0.9"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.AdminSpaceController">
+
+    <!-- Top filter bar -->
+    <top>
+        <ToolBar>
+            <Label text="Admin Panel" />
+            <Separator />
+            <Label text="Building:" />
+            <TextField fx:id="txtSelectedBuilding" prefWidth="120.0" />
+            <Label text="Floor:" />
+            <ComboBox fx:id="cbFloorFilter" prefWidth="100.0" />
+
+            <!-- Type Filter -->
+            <Label text="Type:" />
+            <ComboBox fx:id="cbTypeFilter" prefWidth="140" />
+
+            <!-- Capacity filter -->
+            <Label text="Capacity ≥" />
+            <Spinner fx:id="spCapMin" prefWidth="70" />
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Button text="Add Space" onAction="#showAddSpaceDialog"/>
+        </ToolBar>
+    </top>
+
+    <!-- Left operation bar -->
+    <left>
+        <VBox spacing="12" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="15" right="10" bottom="10" left="10" />
+            </padding>
+
+            <!-- Return to overview -->
+            <Button fx:id="btnOverview" text="Overview" onAction="#handleOverview"/>
+
+            <!-- New sort dropdown -->
+            <Label text="Sort by:" />
+            <ComboBox fx:id="cbSort" prefWidth="160.0" />
+
+            
+        </VBox>
+    </left>
+
+    <!-- Right legend -->
+    <right>
+        <VBox spacing="8">
+            <padding>
+                <Insets top="15" right="10" bottom="10" left="10" />
+            </padding>
+
+            <Label text="Legend" />
+            <HBox spacing="8"><Pane styleClass="dot-available"/><Label text="Available" /></HBox>
+            <HBox spacing="8"><Pane styleClass="dot-booked"/><Label text="Booked" /></HBox>
+            <HBox spacing="8"><Pane styleClass="dot-maintenance"/><Label text="Maintenance" /></HBox>
+        </VBox>
+    </right>
+
+    <!-- Center canvas area -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <AnchorPane fx:id="canvas" prefHeight="800" prefWidth="1200" styleClass="space-canvas"/>
+        </ScrollPane>
+    </center>
+
+    <!-- Bottom status bar -->
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <Label fx:id="lblStatus" text="Ready" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

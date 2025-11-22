@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<!-- Outer container: fills window, but content won't be stretched -->
+<VBox spacing="35" alignment="CENTER"
+      style="-fx-background-color: transparent;"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="application.RegisterController">
+
+    <!-- Title -->
+    <Label text="Create Your Account"
+           style="-fx-font-size: 28px; -fx-text-fill: #333; -fx-font-weight: bold;" />
+
+    <!-- Keep the entire form block at fixed width and centered -->
+    <HBox alignment="CENTER">
+        <GridPane hgap="15" vgap="15">
+            <padding>
+                <Insets top="10" bottom="10" left="40" right="40"/>
+            </padding>
+
+            <!-- Name -->
+            <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                   style="-fx-font-size: 16px;" />
+            <TextField fx:id="nameField"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1"
+                       prefWidth="260"
+                       style="-fx-background-radius: 8; -fx-padding: 8;" />
+
+            <!-- Password -->
+            <Label text="Password:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                   style="-fx-font-size: 16px;" />
+            <TextField fx:id="passwordField"
+                       GridPane.rowIndex="1" GridPane.columnIndex="1"
+                       prefWidth="260"
+                       style="-fx-background-radius: 8; -fx-padding: 8;" />
+
+            <!-- Email -->
+            <Label text="Email:" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                   style="-fx-font-size: 16px;" />
+            <TextField fx:id="emailField"
+                       GridPane.rowIndex="2" GridPane.columnIndex="1"
+                       prefWidth="260"
+                       style="-fx-background-radius: 8; -fx-padding: 8;" />
+
+            <!-- Type -->
+            <Label text="Type:" GridPane.rowIndex="3" GridPane.columnIndex="0"
+                   style="-fx-font-size: 16px;" />
+            <ChoiceBox fx:id="typeBox"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1"
+                       prefWidth="260"
+                       style="-fx-background-radius: 8;" />
+        </GridPane>
+    </HBox>
+
+    <!-- Button area -->
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Register"
+                onAction="#register"
+                prefWidth="130"
+                style="
+                    -fx-background-color: #4A90E2;
+                    -fx-text-fill: white;
+                    -fx-font-size: 16px;
+                    -fx-background-radius: 10;
+                    -fx-padding: 8;
+                "/>
+
+        <Button text="Login"
+                onAction="#backToLogin"
+                prefWidth="130"
+                style="
+                    -fx-background-color: #e0e0e0;
+                    -fx-text-fill: #555;
+                    -fx-font-size: 16px;
+                    -fx-background-radius: 10;
+                    -fx-padding: 8;
+                "/>
+    </HBox>
+
+</VBox>
